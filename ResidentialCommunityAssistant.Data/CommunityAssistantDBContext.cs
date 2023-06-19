@@ -2,6 +2,7 @@
 {
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
+    using ResidentialCommunityAssistant.Data.Configuration;
     using ResidentialCommunityAssistant.Data.Models;
 
     public class CommunityAssistantDBContext : IdentityDbContext
@@ -15,6 +16,8 @@
         {
             builder.Entity<HomeownersAddresses>()
                    .HasKey(ha => new { ha.HomeownerId, ha.AddressId });
+
+            builder.ApplyConfiguration(new UserConfiguration());
 
             base.OnModelCreating(builder);
         }
