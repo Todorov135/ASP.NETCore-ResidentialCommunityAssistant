@@ -14,5 +14,12 @@
         public const int AddressNumberMinLength = 1;
         public const int AddressNumberMaxLength = 10;
 
+        //LocationType
+        public const int LocationTypeNameMinLength = 2;
+        public const int LocationTypeNameMaxLength = 16;
+
+        //LocalityType
+        public const int LocalityTypeNameMinLength = 2;
+        public const int LocalityTypeNameMaxLength = 16;
     }
 }

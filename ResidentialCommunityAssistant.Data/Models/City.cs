@@ -1,6 +1,7 @@
 ﻿namespace ResidentialCommunityAssistant.Data.Models
 {
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
     using static Common.GlobalConstants;
 
     public class City
@@ -22,7 +23,12 @@
         /// City post code.
         /// </summary>
         [StringLength(CityPostCodeMaxLength)]
-        public string? PostCode { get; set; } 
+        public string? PostCode { get; set; }
+
+        [Required]
+        [ForeignKey(nameof(LocalityType))]
+        public int LocalityTypeId { get; set; }
+        public virtual LocalityType LocalityType { get; set; } = null!;
 
     }
 }

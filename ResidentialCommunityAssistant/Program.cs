@@ -21,8 +21,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 {
     options.SignIn.RequireConfirmedAccount = passwordConfigDevEnv.GetValue<bool>("RequireConfirmedAccount");
-    options.Password.RequireDigit = passwordConfigDevEnv.GetValue<bool>("passwordConfigDevEnv");
-    options.Password.RequiredLength = passwordConfigDevEnv.GetValue<int>("RequiredLength");
+    options.Password.RequireDigit = passwordConfigDevEnv.GetValue<bool>("RequireDigit");
     options.Password.RequireNonAlphanumeric = passwordConfigDevEnv.GetValue<bool>("RequireNonAlphanumeric");
     options.Password.RequireUppercase = passwordConfigDevEnv.GetValue<bool>("RequireUppercase");
 })

@@ -22,8 +22,8 @@
             IdentityUser homeManager = new IdentityUser()
             {
                 Id = "8815d5cc-c403-43e8-b2d3-40f57a8d1d61",
-                UserName = "home manager",
-                NormalizedUserName = "home manager".ToUpper(),
+                UserName = "homeManager@mail.comr",
+                NormalizedUserName = "homeManager@mail.com".ToUpper(),
                 Email = "homeManager@mail.com",
                 NormalizedEmail = "homeManager@mail.com".ToUpper()                
             };
@@ -33,8 +33,8 @@
             IdentityUser firstOwner = new IdentityUser()
             {
                 Id = "579b52e0-38e4-4f41-a30f-31e72767c536",
-                UserName = "firstOwner",
-                NormalizedUserName = "firstOwner".ToUpper(),
+                UserName = "firstOwner@mail.com",
+                NormalizedUserName = "firstOwner@mail.com".ToUpper(),
                 Email = "firstOwner@mail.com",
                 NormalizedEmail = "firstOwner@mail.com".ToUpper()
             };
@@ -44,12 +44,12 @@
             IdentityUser secondOwner = new IdentityUser()
             {
                 Id = "88d33982-06d8-43f0-b809-7d6ed7f3ab23",
-                UserName = "secondOwner",
-                NormalizedUserName = "secondOwner".ToUpper(),
+                UserName = "secondOwner@mail.com",
+                NormalizedUserName = "secondOwner@mail.com".ToUpper(),
                 Email = "secondOwner@mail.com",
                 NormalizedEmail = "secondOwner@mail.com".ToUpper()
             };
-            secondOwner.PasswordHash = hasher.HashPassword(secondOwner, "firstOwner");
+            secondOwner.PasswordHash = hasher.HashPassword(secondOwner, "secondOwner");
             users.Add(secondOwner);
 
             return users;

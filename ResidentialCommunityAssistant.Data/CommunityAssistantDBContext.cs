@@ -12,12 +12,26 @@
         {
         }
 
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<City> Cities { get; set; }        
+        public DbSet<UserAddress> UsersAddresses { get; set; }
+        public DbSet<LocalityType> LocalityTypes { get; set; }
+        public DbSet<LocationType> LocationTypes { get; set; }
+
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<HomeownersAddresses>()
-                   .HasKey(ha => new { ha.HomeownerId, ha.AddressId });
-
+            builder.Entity<UserAddress>()
+                   .HasKey(ha => new { ha.UserId, ha.AddressId });
+            
+            builder.ApplyConfiguration(new AddressConfiguration());
+            builder.ApplyConfiguration(new CityConfiguration());            
+            builder.ApplyConfiguration(new LocalityTypeConfiguration());
+            builder.ApplyConfiguration(new LocationTypeConfiguration());
+            builder.ApplyConfiguration(new RoleConfiguration());
+            builder.ApplyConfiguration(new RoleUserConfiguration());
             builder.ApplyConfiguration(new UserConfiguration());
+           
 
             base.OnModelCreating(builder);
         }

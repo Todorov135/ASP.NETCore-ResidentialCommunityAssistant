@@ -1,5 +1,6 @@
 ﻿namespace ResidentialCommunityAssistant.Data.Models
 {
+    using Microsoft.AspNetCore.Identity;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using static Common.GlobalConstants;
@@ -27,6 +28,14 @@
         public string Number { get; set; } = null!;
 
         /// <summary>
+        /// Type of location.
+        /// </summary>
+        [Required]
+        [ForeignKey(nameof(LocationType))]
+        public int LocationTypeId { get; set; }
+        public virtual LocationType LocationType { get; set; } = null!;
+
+        /// <summary>
         /// Address in city.
         /// </summary>
         [Required]
@@ -37,6 +46,6 @@
         /// <summary>
         /// List of homeowners in current address.
         /// </summary>
-        public virtual IEnumerable<Homeowner> Homeowners { get; set; } = new List<Homeowner>();
+        public virtual IEnumerable<UserAddress> Homeowners { get; set; } = new List<UserAddress>();
     }
 }

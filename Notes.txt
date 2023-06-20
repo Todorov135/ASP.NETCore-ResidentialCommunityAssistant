@@ -1,0 +1,4 @@
+Troubleshoots
+
+1. When migration "20230620080318_InitialTablesCreating" was initial, EF Core create second mapping table. 
+This table war removed from migration agains with index creation of it - manually.
