@@ -21,5 +21,12 @@
         //LocalityType
         public const int LocalityTypeNameMinLength = 2;
         public const int LocalityTypeNameMaxLength = 16;
+
+        //CommunityTopic
+        public const int CommunityTopicTitleMinLength = 4;
+        public const int CommunityTopicTitleMaxLength = 256;
+        public const int CommunityTopicDescriptionMinLength = 4;
+        public const int CommunityTopicDescriptionMaxLength = 1024;
+
     }
 }

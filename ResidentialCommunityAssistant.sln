@@ -9,11 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ResidentialCommunityAssista
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ResidentialCommunityAssistant.Services", "ResidentialCommunityAssistant.Services\ResidentialCommunityAssistant.Services.csproj", "{6B3ECDDA-10C8-4A6A-9576-4940440E235D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{87592955-F698-4E17-95C4-4DC68FED6EF7}"
-	ProjectSection(SolutionItems) = preProject
-		Notes.txt = Notes.txt
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

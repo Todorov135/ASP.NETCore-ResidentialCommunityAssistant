@@ -1,27 +1,48 @@
 ﻿namespace ResidentialCommunityAssistant.Controllers
 {
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using ResidentialCommunityAssistant.Models;
+    using ResidentialCommunityAssistant.Services.Contracts.Home;
+    using ResidentialCommunityAssistant.Services.Models.Home;
     using System.Diagnostics;
 
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IHomeService homeService;
+        public HomeController(IHomeService homeService)
         {
-            _logger = logger;
+            this.homeService = homeService;
         }
 
+        [AllowAnonymous]
         public IActionResult Index()
         {
+            if (this.User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction(nameof(Index), "Owner");
+            }
+
             return View();
+        }
+        
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task<IActionResult> ChekForExistingAddress(string cityName, string addressName, string number)
+        {
+            var addressModel = this.homeService.GetAddressAsync(cityName, addressName, number);
+
+            if (addressModel.Result != null)
+            {
+                return RedirectToAction(nameof(Index), "Owner");
+            }
+            else
+            {
+                return RedirectToAction(nameof(Index));
+            }            
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

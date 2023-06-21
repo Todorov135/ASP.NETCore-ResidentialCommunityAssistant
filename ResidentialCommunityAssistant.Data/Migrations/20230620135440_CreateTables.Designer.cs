@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ResidentialCommunityAssistant.Data;
 
@@ -11,9 +12,10 @@ using ResidentialCommunityAssistant.Data;
 namespace ResidentialCommunityAssistant.Data.Migrations
 {
     [DbContext(typeof(CommunityAssistantDBContext))]
-    partial class CommunityAssistantDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230620135440_CreateTables")]
+    partial class CreateTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,14 +54,14 @@ namespace ResidentialCommunityAssistant.Data.Migrations
                         new
                         {
                             Id = "492c2f53-e30a-4da9-b639-e599ef6d7794",
-                            ConcurrencyStamp = "281002f3-1aab-4a88-b803-cefbf8e8615b",
+                            ConcurrencyStamp = "487d6561-6536-4fb8-8ec3-6c57f072a00d",
                             Name = "HomeManager",
                             NormalizedName = "HOMEMANAGER"
                         },
                         new
                         {
                             Id = "df52a94f-e70f-4872-a5a8-48631411afdb",
-                            ConcurrencyStamp = "1f557737-98c4-465c-87f7-43911bafb6a0",
+                            ConcurrencyStamp = "471a83b7-4501-4e26-8d20-e043e6aa7923",
                             Name = "StoreManager",
                             NormalizedName = "STOREMANAGER"
                         });
@@ -159,15 +161,15 @@ namespace ResidentialCommunityAssistant.Data.Migrations
                         {
                             Id = "8815d5cc-c403-43e8-b2d3-40f57a8d1d61",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0fed4592-666c-46dd-8970-20f7942a2be1",
+                            ConcurrencyStamp = "80bea816-cc57-4cb3-93aa-cf73d7823b97",
                             Email = "homeManager@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "HOMEMANAGER@MAIL.COM",
                             NormalizedUserName = "HOMEMANAGER@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKJbb/GoS8BadK/gcxGqMynrn7LQGtiz1Oq6KdjuatvRuYNSJmWQ0dl3fc3XIhJCtA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEM2ALQZzUw2d83SJN2gVtn8Esm2SLcHqsm7E224RE20Td8LdOIxRoCzKcUn2AUKrw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ee18a46d-b019-43e7-8076-a26ab7329eff",
+                            SecurityStamp = "88f694fb-0974-4f71-964d-9d88926eef5c",
                             TwoFactorEnabled = false,
                             UserName = "homeManager@mail.comr"
                         },
@@ -175,15 +177,15 @@ namespace ResidentialCommunityAssistant.Data.Migrations
                         {
                             Id = "579b52e0-38e4-4f41-a30f-31e72767c536",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "cd4cc5be-dc74-478c-afac-7319445b1a0f",
+                            ConcurrencyStamp = "226be5a7-d9e7-4379-ad6d-455c5c6f5d78",
                             Email = "firstOwner@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "FIRSTOWNER@MAIL.COM",
                             NormalizedUserName = "FIRSTOWNER@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDGNIrLN+D7cII45sSdCOqw1O0Rogas9YjpLA+dDegLDyIzQhpbLI2Yl4T6kzwFaJA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEcZqoJcdTWR9/f8L1xRdT2HiImq7IAXLtkGzoWd1sv5XdJ4fLyeG6M7GLP6cL7kcw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "decedab5-1877-49d1-b097-d1c9fb13256a",
+                            SecurityStamp = "8455053f-5f9c-42f9-81a6-4f81cc2af51c",
                             TwoFactorEnabled = false,
                             UserName = "firstOwner@mail.com"
                         },
@@ -191,15 +193,15 @@ namespace ResidentialCommunityAssistant.Data.Migrations
                         {
                             Id = "88d33982-06d8-43f0-b809-7d6ed7f3ab23",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5dc5b0cd-9810-40dc-b808-a5a730591169",
+                            ConcurrencyStamp = "b27101c8-3c4a-44e9-84b2-d67c474c371c",
                             Email = "secondOwner@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "SECONDOWNER@MAIL.COM",
                             NormalizedUserName = "SECONDOWNER@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEI/oWKp+a4qz/B2VbWxMq1dO/6hu7sKzhhco/fRQRXMs9f0d/uAs5nrjLhzBcL+w5g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENRk9ItI2aJKLRQCSsTuY+U7ii5G4UNiVy/IJinrTG5/NQeF7DA4r4D3fpAOrC/cEQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d7401f97-ea2d-45a8-9dc7-14fcea6bac98",
+                            SecurityStamp = "4ed41f77-c2f3-4ccf-b7fe-f03b69808e8b",
                             TwoFactorEnabled = false,
                             UserName = "secondOwner@mail.com"
                         });
@@ -391,54 +393,6 @@ namespace ResidentialCommunityAssistant.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("ResidentialCommunityAssistant.Data.Models.CommunityTopic", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("AddressId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatorId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(1024)
-                        .HasColumnType("nvarchar(1024)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AddressId");
-
-                    b.HasIndex("CreatorId");
-
-                    b.ToTable("CommunityTopics");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AddressId = 2,
-                            CreatedOn = new DateTime(2023, 6, 21, 15, 5, 15, 0, DateTimeKind.Unspecified),
-                            CreatorId = "579b52e0-38e4-4f41-a30f-31e72767c536",
-                            Description = "Закупуване, засаждане и подръжка на тревни чимове за двора пред сградата.",
-                            Title = "Озеленяване на градинка"
-                        });
-                });
-
             modelBuilder.Entity("ResidentialCommunityAssistant.Data.Models.LocalityType", b =>
                 {
                     b.Property<int>("Id")
@@ -612,25 +566,6 @@ namespace ResidentialCommunityAssistant.Data.Migrations
                     b.Navigation("LocalityType");
                 });
 
-            modelBuilder.Entity("ResidentialCommunityAssistant.Data.Models.CommunityTopic", b =>
-                {
-                    b.HasOne("ResidentialCommunityAssistant.Data.Models.Address", "Address")
-                        .WithMany("CommunityTopics")
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Creator")
-                        .WithMany()
-                        .HasForeignKey("CreatorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Address");
-
-                    b.Navigation("Creator");
-                });
-
             modelBuilder.Entity("ResidentialCommunityAssistant.Data.Models.UserAddress", b =>
                 {
                     b.HasOne("ResidentialCommunityAssistant.Data.Models.Address", "Address")
@@ -652,8 +587,6 @@ namespace ResidentialCommunityAssistant.Data.Migrations
 
             modelBuilder.Entity("ResidentialCommunityAssistant.Data.Models.Address", b =>
                 {
-                    b.Navigation("CommunityTopics");
-
                     b.Navigation("Homeowners");
                 });
 #pragma warning restore 612, 618

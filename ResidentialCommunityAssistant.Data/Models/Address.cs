@@ -1,6 +1,5 @@
 ﻿namespace ResidentialCommunityAssistant.Data.Models
 {
-    using Microsoft.AspNetCore.Identity;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using static Common.GlobalConstants;
@@ -44,8 +43,13 @@
         public virtual City City { get; set; } = null!;
 
         /// <summary>
-        /// List of homeowners in current address.
+        /// Collection of homeowners in current address.
         /// </summary>
         public virtual IEnumerable<UserAddress> Homeowners { get; set; } = new List<UserAddress>();
+
+        /// <summary>
+        /// Collection of topics in current address.
+        /// </summary>
+        public virtual IEnumerable<CommunityTopic> CommunityTopics { get; set; } = new List<CommunityTopic>();
     }
 }

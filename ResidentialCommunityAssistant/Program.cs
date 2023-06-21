@@ -1,8 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ResidentialCommunityAssistant.Data;
-using Microsoft.Extensions.Configuration;
-using System.IO;
+using ResidentialCommunityAssistant.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +26,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
 })
     .AddEntityFrameworkStores<CommunityAssistantDBContext>();
 builder.Services.AddControllersWithViews();
+builder.Services.AddApplicationService();
 
 var app = builder.Build();
 

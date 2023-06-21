@@ -1,8 +1,19 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+﻿<div class="global-container">
+    <article class="welcome">
+        <header>Добре дошли, скъпи съграждани!</header>
+        <main>Асистент за жилищната общност(Residential Community Assistant) е приложение за организиране на живущите на дадена сграда.</main>
+        <form asp-controller="Home" asp-action="ChekForExistingAddress" method="post">
+            <p>Проверка на сграда</p>
+            <label for="cityName">
+                <input type="text" name="cityName">
+            </label>
+            <label for="addressName">
+                <input type="text" name="addressName">
+            </label>
+            <label for="number">
+                <input type="text" name="number">
+            </label>
+            <input type="submit" value="Провери">
+        </form>
+    </article>
 </div>
