@@ -1,0 +1,27 @@
+﻿@model SelectedOwnedAddressViewModel
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <div>Моля, изберете адрес:</div>
+        <form method="post">
+            
+            <div class="form-group">
+                <select asp-for="SelectedAddressId" class="form-control">
+                   
+                    @foreach (var address in Model.OwnedAddresses)
+                    {
+                        <option value="@address.Id">@address.AddressFullName</option>
+                    }
+                </select>
+                
+            </div>
+
+            <div class="text-center">
+                <input class="btn btn-primary mt-3" type="submit" value="Избери" />
+            </div>
+        </form>
+    </div>
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">        
+        <a asp-controller="Owner" asp-action="AddAddress">Добавете адрес</a>
+    </div>
+</div>

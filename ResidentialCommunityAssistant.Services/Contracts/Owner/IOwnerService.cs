@@ -4,6 +4,9 @@
 
     public interface IOwnerService
     {
-        Task<IEnumerable<CommunityTopicViewModel>> GetAllTopicsForAddress(int addressId);
+        Task<IEnumerable<CommunityTopicViewModel>> GetAllTopicsForAddressAsync(int addressId);
+        Task<IEnumerable<OwnedAddressViewModel>> GetOwnedAddressesAsync(string userId);
+        Task<IEnumerable<LocalityTypeViewModel>> GetAllLocalityTypesAsync();
+        Task<IEnumerable<LocationTypeViewModel>> GetAllLocationTypesAsync();
     }
 }

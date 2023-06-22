@@ -20,7 +20,7 @@
         {
             if (this.User.Identity.IsAuthenticated)
             {
-                return RedirectToAction(nameof(Index), "Owner");
+                return RedirectToAction("ChooseAddress", "Owner");
             }
 
             return View();
@@ -30,11 +30,11 @@
         [HttpPost]
         public async Task<IActionResult> ChekForExistingAddress(string cityName, string addressName, string number)
         {
-            var addressModel = this.homeService.GetAddressAsync(cityName, addressName, number);
+            var addressModel = await this.homeService.GetAddressAsync(cityName, addressName, number);
 
-            if (addressModel.Result != null)
+            if (addressModel != null)
             {
-                return RedirectToAction(nameof(Index), "Owner");
+                return RedirectToAction("ChooseAddress", "Owner");
             }
             else
             {

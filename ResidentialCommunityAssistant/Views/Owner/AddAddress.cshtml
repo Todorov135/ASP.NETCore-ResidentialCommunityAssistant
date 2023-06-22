@@ -1,0 +1,49 @@
+﻿@model AddAddressViewModel
+
+<h2>Add Address</h2>
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="CityLocalityId"></label>
+                <select asp-for="CityLocalityId" class="form-control">
+                    @foreach (var cityLocality in Model.LocalityTypeViews)
+                    {
+                        <option value="@cityLocality.Id">@cityLocality.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="CityLocalityId" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.CityName"></label>
+                <input asp-for="@Model.CityName" class="form-control" placeholder="София">
+                <span asp-validation-for="@Model.CityName" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LocationTypeId"></label>
+                <select asp-for="LocationTypeId" class="form-control">
+                    @foreach (var locationType in Model.LocationTypeViews)
+                    {
+                        <option value="@locationType.Id">@locationType.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="LocationTypeId" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Name"></label>
+                <input asp-for="@Model.Name" class="form-control" placeholder="Цар Борис III-ти">
+                <span asp-validation-for="@Model.Name" class="small text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.Number"></label>
+                <input asp-for="@Model.Number" class="form-control" placeholder="35">
+                <span asp-validation-for="@Model.Number" class="small text-danger"></span>
+            </div>
+
+            <div class="text-center">
+                <input class="btn btn-primary mt-3" type="submit" value="Добави" />
+            </div>
+        </form>
+    </div>
+</div>

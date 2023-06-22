@@ -1,1 +1,21 @@
-﻿<h1>Community topics</h1>
+﻿@model IEnumerable<CommunityTopicViewModel>
+
+<h1>Community topics</h1>
+
+<div class="row">
+    <div class="form-group col-md-3 d-flex justify-content-between">
+        <div class="form-group">
+                    
+                @foreach (var topic in Model)
+                {
+                    <div class="card-body text-center">
+                        <h4>Тема: @topic.Title</h4>
+                        <p>Описание: @topic.Description</p>
+                        <p>Създадено: @topic.CreatedOn</p>
+                        <p>Създател: @topic.CreatorName</p>
+                    </div>
+                }
+          
+        </div>
+    </div>
+</div>
