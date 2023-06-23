@@ -5,5 +5,6 @@
     public interface IHomeService
     {
         Task<AddressViewModel?> GetAddressAsync(string cityName, string addressName, string number);
+        Task<AddressViewModel?> GetAddressByIdAsync(int addressId);
     }
 }

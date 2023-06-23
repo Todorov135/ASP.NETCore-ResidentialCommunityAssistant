@@ -1,0 +1,20 @@
+﻿@model AddressViewModel
+
+<h2>Address Details</h2>
+
+<div class="card col-4" style="width: 20rem; ">
+            <div class="card-body">
+                <h5 class="card-title mt-1">@Model.CityName</h5>
+                <p class="mb-0">Адрес: @Model.AddressName </p>
+                <p class="mb-0">Номер: @Model.Number</p>
+            </div>
+    @if (this.User.Identity.IsAuthenticated)
+    {
+        <a asp-controller="Owner" asp-action="AddAddressToUser" asp-route-Id ="@Model.Id" class="btn btn-primary btn-sm">Станете част от общността на този адрес."</a>       
+    }
+    else
+    {
+        <p>За да продължите, моля регистрирайте се или влезте във Вашият профил.</p>
+    }
+
+</div>

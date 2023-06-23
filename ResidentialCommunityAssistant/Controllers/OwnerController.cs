@@ -31,9 +31,17 @@
         }
 
         [HttpPost]
-        public IActionResult ChooseAddress(int SelectedAddressId)
-        {           
-            return RedirectToAction(nameof(CommunityTopics), new { addressId = SelectedAddressId});            
+        public IActionResult ChooseAddress(int selectedAddressId)
+        {
+            var userId = this.User.Id();
+            bool isAddressInUserList = this.ownerService.IsAddressInUsersList(userId, selectedAddressId);
+
+            if (!isAddressInUserList)
+            {
+                return View("Error");
+            }
+
+            return RedirectToAction(nameof(CommunityTopics), new { addressId = selectedAddressId});            
         }
 
         [HttpGet]
@@ -53,10 +61,20 @@
             return View(addAddress);
         }
 
+        [HttpPost]
         public async Task<IActionResult> AddAddress(AddAddressViewModel model)
         {
             //TODO: Switch redirection!
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AddAddressToUser(int id)
+        {
+            var userId = this.User.Id();
+            await this.ownerService.AddAddressToUserAsync(userId, id);
+
+            return View();
         }
     }
 }

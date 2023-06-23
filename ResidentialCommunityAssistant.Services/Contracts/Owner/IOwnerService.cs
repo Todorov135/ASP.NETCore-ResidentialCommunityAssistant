@@ -8,5 +8,8 @@
         Task<IEnumerable<OwnedAddressViewModel>> GetOwnedAddressesAsync(string userId);
         Task<IEnumerable<LocalityTypeViewModel>> GetAllLocalityTypesAsync();
         Task<IEnumerable<LocationTypeViewModel>> GetAllLocationTypesAsync();
+        Task AddAddressAsync(AddAddressViewModel address);
+        Task AddAddressToUserAsync(string userId, int addressId);
+        bool IsAddressInUsersList(string userId, int addressId);
     }
 }

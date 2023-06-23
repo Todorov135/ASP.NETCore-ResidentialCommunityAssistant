@@ -23,9 +23,24 @@
         public async Task<AddressViewModel?> GetAddressAsync(string cityName, string addressName, string number)
         {
             return await this.data.Addresses
-                                  .Where(a => a.City.Name == cityName && a.Name == addressName && a.Number == number)
+                                  .Where(a => a.City.Name.ToLower() == cityName.ToLower() && a.Name.ToLower() == addressName.ToLower() && a.Number == number.ToLower())
                                   .Select(a => new AddressViewModel()
                                   {
+                                      Id = a.Id,
+                                      CityName = a.City.Name,
+                                      AddressName = a.Name,
+                                      Number = a.Number
+                                  })
+                                  .FirstOrDefaultAsync();
+        }
+
+        public async Task<AddressViewModel?> GetAddressByIdAsync(int addressId)
+        {
+            return await this.data.Addresses
+                                  .Where(a => a.Id == addressId)
+                                  .Select(a => new AddressViewModel()
+                                  {
+                                      Id = a.Id,
                                       CityName = a.City.Name,
                                       AddressName = a.Name,
                                       Number = a.Number

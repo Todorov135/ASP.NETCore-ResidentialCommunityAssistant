@@ -2,9 +2,9 @@
 {
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using ResidentialCommunityAssistant.Data.Models;
     using ResidentialCommunityAssistant.Models;
     using ResidentialCommunityAssistant.Services.Contracts.Home;
-    using ResidentialCommunityAssistant.Services.Models.Home;
     using System.Diagnostics;
 
     public class HomeController : BaseController
@@ -26,21 +26,40 @@
             return View();
         }
         
+        
+
+        [AllowAnonymous]
+        [HttpGet]
+        public IActionResult AddressSearch()
+        {            
+            return View();
+        }
+
         [AllowAnonymous]
         [HttpPost]
-        public async Task<IActionResult> ChekForExistingAddress(string cityName, string addressName, string number)
+        public async Task<IActionResult> AddressSearch(string cityName, string addressName, string number)
         {
             var addressModel = await this.homeService.GetAddressAsync(cityName, addressName, number);
-
+            
             if (addressModel != null)
             {
-                return RedirectToAction("ChooseAddress", "Owner");
+                return RedirectToAction("AddressDetails", "Home", new {addressId = addressModel.Id});
             }
             else
             {
-                return RedirectToAction(nameof(Index));
-            }            
+                return View("NotFoundAddress");
+            }
         }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<IActionResult> AddressDetails(int addressId)
+        {
+            var addressModel = await this.homeService.GetAddressByIdAsync(addressId);
+
+            return View(addressModel);
+        }
+
 
 
 

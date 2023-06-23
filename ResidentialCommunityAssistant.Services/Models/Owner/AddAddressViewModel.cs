@@ -14,6 +14,10 @@
         [StringLength(CityNameMaxLength, MinimumLength = CityNameMinLength)]
         public string CityName { get; set; } = null!;
 
+        [Display(Name = "Пощенски код")]
+        [StringLength(CityPostCodeMaxLength, MinimumLength = CityPostCodeMinLength)]
+        public string? PostCode { get; set; }
+
         [Display(Name = "Тип на локацията")]
         [Required]
         public int LocationTypeId { get; set; }
@@ -28,10 +32,6 @@
         [Required]
         [StringLength(AddressNumberMaxLength, MinimumLength = AddressNumberMinLength)]
         public string Number { get; set; } = null!;
-
-        
-
-               
 
     }
 }
