@@ -2,9 +2,9 @@
 {
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using ResidentialCommunityAssistant.Data.Models;
     using ResidentialCommunityAssistant.Models;
     using ResidentialCommunityAssistant.Services.Contracts.Home;
+    using ResidentialCommunityAssistant.Services.Models.Home;
     using System.Diagnostics;
 
     public class HomeController : BaseController
@@ -31,15 +31,22 @@
         [AllowAnonymous]
         [HttpGet]
         public IActionResult AddressSearch()
-        {            
-            return View();
+        {
+            var address = new AddressViewModel();
+            
+            return View(address);
         }
 
         [AllowAnonymous]
         [HttpPost]
-        public async Task<IActionResult> AddressSearch(string cityName, string addressName, string number)
+        public async Task<IActionResult> AddressSearch(AddressViewModel searchedAddress)
         {
-            var addressModel = await this.homeService.GetAddressAsync(cityName, addressName, number);
+            var addressModel = await this.homeService.GetAddressAsync(searchedAddress.CityName, searchedAddress.AddressName, searchedAddress.Number);
+
+            if (!ModelState.IsValid)
+            {
+                return View(searchedAddress);
+            }
             
             if (addressModel != null)
             {

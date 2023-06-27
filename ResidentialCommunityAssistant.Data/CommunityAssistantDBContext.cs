@@ -13,6 +13,7 @@
         }
 
         public DbSet<Address> Addresses { get; set; }
+        public DbSet<Apartament> Apartaments { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<CommunityTopic> CommunityTopics { get; set; }
         public DbSet<UserAddress> UsersAddresses { get; set; }
@@ -26,6 +27,7 @@
                    .HasKey(ha => new { ha.UserId, ha.AddressId });
             
             builder.ApplyConfiguration(new AddressConfiguration());
+            builder.ApplyConfiguration(new ApartamentConfiguration());
             builder.ApplyConfiguration(new CityConfiguration());
             builder.ApplyConfiguration(new CommunityTopicConfiguration());
             builder.ApplyConfiguration(new LocalityTypeConfiguration());

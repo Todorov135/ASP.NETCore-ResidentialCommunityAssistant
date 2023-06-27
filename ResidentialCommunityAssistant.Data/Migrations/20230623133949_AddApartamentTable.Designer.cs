@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ResidentialCommunityAssistant.Data;
 
@@ -11,9 +12,10 @@ using ResidentialCommunityAssistant.Data;
 namespace ResidentialCommunityAssistant.Data.Migrations
 {
     [DbContext(typeof(CommunityAssistantDBContext))]
-    partial class CommunityAssistantDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230623133949_AddApartamentTable")]
+    partial class AddApartamentTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,14 +54,14 @@ namespace ResidentialCommunityAssistant.Data.Migrations
                         new
                         {
                             Id = "492c2f53-e30a-4da9-b639-e599ef6d7794",
-                            ConcurrencyStamp = "aab3dbc7-a2c6-4220-9651-4c2ea662b9b8",
+                            ConcurrencyStamp = "2a9b66dd-78d1-407c-a251-29c13ed4e8f0",
                             Name = "HomeManager",
                             NormalizedName = "HOMEMANAGER"
                         },
                         new
                         {
                             Id = "df52a94f-e70f-4872-a5a8-48631411afdb",
-                            ConcurrencyStamp = "74b0aa59-6659-4bf0-8298-420832a196e1",
+                            ConcurrencyStamp = "76d6a7f7-4ab9-43e4-b9a9-4a459caf79ad",
                             Name = "StoreManager",
                             NormalizedName = "STOREMANAGER"
                         });
@@ -159,15 +161,15 @@ namespace ResidentialCommunityAssistant.Data.Migrations
                         {
                             Id = "8815d5cc-c403-43e8-b2d3-40f57a8d1d61",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3b5afa4d-bb08-445b-9add-2970c2b1d944",
+                            ConcurrencyStamp = "683da073-c6bc-4dec-b835-c278af143e5d",
                             Email = "homeManager@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "HOMEMANAGER@MAIL.COM",
                             NormalizedUserName = "HOMEMANAGER@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGKfEp+vJ93jq2nKzabO02G2xTcFdh68/tTwunA6yLYlmebihHdASdnpJWyqiYdhnw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPIDAOVmvVV/pC462V7fxUrbDSHYAkKCQqhh6ZPdEMzR54RbpPOwWdv8WJJjRlZwUw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ed934d2e-8776-45fd-ad71-ae15665adf5f",
+                            SecurityStamp = "99a3c19d-61b6-4143-89de-71e353b30ae4",
                             TwoFactorEnabled = false,
                             UserName = "homeManager@mail.comr"
                         },
@@ -175,15 +177,15 @@ namespace ResidentialCommunityAssistant.Data.Migrations
                         {
                             Id = "579b52e0-38e4-4f41-a30f-31e72767c536",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "91925cc1-4625-4567-a9b5-88a435a89ba6",
+                            ConcurrencyStamp = "4bf7095f-f42b-4018-8421-8579c1cd11d1",
                             Email = "firstOwner@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "FIRSTOWNER@MAIL.COM",
                             NormalizedUserName = "FIRSTOWNER@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPCqX7LL54KFnlDMiUJV2VI2uGwNG3SeyggYrZqWhbFlQ7BRvWEKZnEp1/EMVgAZYQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEtBJv3pJETjYwyNu43bnULp511SrVUZQ47LKIGWTIKvoFDU3snhFrwkoGaTWfVqsw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a38970d9-3b22-4581-95a2-f6258c72b959",
+                            SecurityStamp = "4a95322e-e0da-43cc-b979-5ca3f0c0f13b",
                             TwoFactorEnabled = false,
                             UserName = "firstOwner@mail.com"
                         },
@@ -191,15 +193,15 @@ namespace ResidentialCommunityAssistant.Data.Migrations
                         {
                             Id = "88d33982-06d8-43f0-b809-7d6ed7f3ab23",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a361531a-d8ee-48f0-a22e-e48f5604d145",
+                            ConcurrencyStamp = "5fea088a-ec1a-4313-b3cd-ff5b835098c0",
                             Email = "secondOwner@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "SECONDOWNER@MAIL.COM",
                             NormalizedUserName = "SECONDOWNER@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAENSxPBeEqbEnMsVVt14VOit7zu3m+ArTBu4dsMrFTgf6AwYiIv7uKt5F/5uZkiyXQw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJBcMq9w4qsRhdjFtmO3OQamo/SUAICuufehxklIl963Pt4EarrFpEtZF6sGtsED9A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a6069084-831b-4c12-95ee-b5e307cb9f4e",
+                            SecurityStamp = "12c44423-36c6-4854-a85f-301506ea4a6b",
                             TwoFactorEnabled = false,
                             UserName = "secondOwner@mail.com"
                         });
@@ -356,7 +358,7 @@ namespace ResidentialCommunityAssistant.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("AddressId")
+                    b.Property<int?>("AddressId")
                         .HasColumnType("int");
 
                     b.Property<int>("Number")
@@ -376,32 +378,6 @@ namespace ResidentialCommunityAssistant.Data.Migrations
                     b.HasIndex("OwnerId");
 
                     b.ToTable("Apartaments");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AddressId = 2,
-                            Number = 1,
-                            OwnerId = "8815d5cc-c403-43e8-b2d3-40f57a8d1d61",
-                            Signature = "A"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AddressId = 2,
-                            Number = 2,
-                            OwnerId = "579b52e0-38e4-4f41-a30f-31e72767c536",
-                            Signature = "A"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AddressId = 2,
-                            Number = 3,
-                            OwnerId = "88d33982-06d8-43f0-b809-7d6ed7f3ab23",
-                            Signature = "A"
-                        });
                 });
 
             modelBuilder.Entity("ResidentialCommunityAssistant.Data.Models.City", b =>
@@ -659,17 +635,13 @@ namespace ResidentialCommunityAssistant.Data.Migrations
 
             modelBuilder.Entity("ResidentialCommunityAssistant.Data.Models.Apartament", b =>
                 {
-                    b.HasOne("ResidentialCommunityAssistant.Data.Models.Address", "Address")
+                    b.HasOne("ResidentialCommunityAssistant.Data.Models.Address", null)
                         .WithMany("Apartaments")
-                        .HasForeignKey("AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AddressId");
 
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Owner")
                         .WithMany()
                         .HasForeignKey("OwnerId");
-
-                    b.Navigation("Address");
 
                     b.Navigation("Owner");
                 });

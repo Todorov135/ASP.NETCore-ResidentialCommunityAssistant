@@ -28,5 +28,12 @@
         public const int CommunityTopicDescriptionMinLength = 4;
         public const int CommunityTopicDescriptionMaxLength = 1024;
 
+        //Apartament
+        public const int ApartamentSignatureMinLength = 1;
+        public const int ApartamentSignatureMaxLength = 10;
+        public const int ApartamentRangeMinLength = 1;
+        public const int ApartamentRangeMaxLength = 10000;
+
+
     }
 }

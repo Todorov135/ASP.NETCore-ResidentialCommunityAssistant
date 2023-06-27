@@ -51,22 +51,7 @@
             return View(communityTopics);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> AddAddress()
-        {
-            var addAddress = new AddAddressViewModel();
-            addAddress.LocalityTypeViews = await this.ownerService.GetAllLocalityTypesAsync();
-            addAddress.LocationTypeViews = await this.ownerService.GetAllLocationTypesAsync();
-
-            return View(addAddress);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> AddAddress(AddAddressViewModel model)
-        {
-            //TODO: Switch redirection!
-            return RedirectToAction(nameof(Index));
-        }
+       
 
         [HttpGet]
         public async Task<IActionResult> AddAddressToUser(int id)

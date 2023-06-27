@@ -24,7 +24,10 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
     options.Password.RequireNonAlphanumeric = passwordConfigDevEnv.GetValue<bool>("RequireNonAlphanumeric");
     options.Password.RequireUppercase = passwordConfigDevEnv.GetValue<bool>("RequireUppercase");
 })
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<CommunityAssistantDBContext>();
+    
+
 builder.Services.AddControllersWithViews();
 builder.Services.AddApplicationService();
 

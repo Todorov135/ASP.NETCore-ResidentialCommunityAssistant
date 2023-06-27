@@ -1,9 +1,10 @@
-﻿namespace ResidentialCommunityAssistant.Services.Models.Owner
+﻿namespace ResidentialCommunityAssistant.Services.Models.HomeManager
 {
+    using ResidentialCommunityAssistant.Services.Models.Owner;
     using System.ComponentModel.DataAnnotations;
     using static ResidentialCommunityAssistant.Data.Common.GlobalConstants;
     public class AddAddressViewModel
-    {
+    { 
         [Display(Name = "Тип на населеното място")]
         [Required]
         public int CityLocalityId { get; set; }

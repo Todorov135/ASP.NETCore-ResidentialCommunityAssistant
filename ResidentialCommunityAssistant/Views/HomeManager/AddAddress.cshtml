@@ -45,10 +45,14 @@
                 <input asp-for="@Model.Number" class="form-control" placeholder="35">
                 <span asp-validation-for="@Model.Number" class="small text-danger"></span>
             </div>
-
+            
             <div class="text-center">
                 <input class="btn btn-primary mt-3" type="submit" value="Добави" />
             </div>
         </form>
     </div>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -51,5 +51,10 @@
         /// Collection of topics in current address.
         /// </summary>
         public virtual IEnumerable<CommunityTopic> CommunityTopics { get; set; } = new List<CommunityTopic>();
+
+        /// <summary>
+        /// Collection of apartaments in current address.
+        /// </summary>
+        public virtual IEnumerable<Apartament> Apartaments { get; set; } = new List<Apartament>();
     }
 }
