@@ -7,11 +7,15 @@
 
     public class OwnerController : BaseController
     {
-        private readonly IOwnerService ownerService;
+        string sessionAddressId = "SessionAddressId";
 
-        public OwnerController(IOwnerService ownerService)
+        private readonly IOwnerService ownerService;
+        
+        public OwnerController(
+            IOwnerService ownerService,
+            IHttpContextAccessor httpContext)
         {
-            this.ownerService = ownerService;
+            this.ownerService = ownerService;            
         }
 
         public IActionResult Index()
@@ -26,7 +30,7 @@
             var userId = this.User.Id();
             var allOwnedAddresses = new SelectedOwnedAddressViewModel();
             allOwnedAddresses.OwnedAddresses = await this.ownerService.GetOwnedAddressesAsync(userId);            
-
+            
             return View(allOwnedAddresses);
         }
 
@@ -47,6 +51,8 @@
         [HttpGet]
         public async Task<IActionResult> CommunityTopics(int addressId)
         {
+            HttpContext.Session.SetInt32(sessionAddressId, addressId);
+
             var communityTopics = await this.ownerService.GetAllTopicsForAddressAsync(addressId);
             return View(communityTopics);
         }
@@ -57,9 +63,26 @@
         public async Task<IActionResult> AddAddressToUser(int id)
         {
             var userId = this.User.Id();
-            await this.ownerService.AddAddressToUserAsync(userId, id);
+            bool isAddressInUserList = this.ownerService.IsAddressInUsersList(userId, id);
+            if (!isAddressInUserList)
+            {
+                await this.ownerService.AddAddressToUserAsync(userId, id);
+            }
 
-            return View();
+            return RedirectToAction(nameof(CommunityTopics));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AllApartaments()
+        {
+            int? addressId = HttpContext.Session.GetInt32(sessionAddressId);
+
+            if (addressId != null)
+            {
+                var apartaments = await this.ownerService.GetAllApartamentsAsync(addressId);
+                return View(apartaments);
+            }
+            return View("Error");
         }
     }
 }

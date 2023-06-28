@@ -14,8 +14,7 @@
         [Required]
         [ForeignKey(nameof(User))]
         public string UserId { get; set; } = null!;
-        public virtual IdentityUser User { get; set; } = null!;
-
+        public virtual ExtendedUser User { get; set; } = null!;
  
     }
 }

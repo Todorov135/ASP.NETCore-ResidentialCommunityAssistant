@@ -34,6 +34,11 @@
         public const int ApartamentRangeMinLength = 1;
         public const int ApartamentRangeMaxLength = 10000;
 
+        //ExtendedUser
+        public const int ExtendedUserFirstNameMinLength = 1;
+        public const int ExtendedUserFirstNameMaxLength = 24;
+        public const int ExtendedUserLastNameMinLength = 1;
+        public const int ExtendedUserLastNameMaxLength = 24;
 
     }
 }

@@ -64,7 +64,7 @@
                                 Title = t.Title,
                                 Description = t.Description,
                                 CreatedOn = t.CreatedOn.ToString("dd/MM/yyyy"),
-                                CreatorName = t.Creator.UserName
+                                CreatorName = $"{t.Creator.FirstName} {t.Creator.LastName}"
                             })
                             .ToListAsync();
                                                                
@@ -87,7 +87,6 @@
                             .ToListAsync();
         }
 
-                        
 
         /// <summary>
         /// Bind user and address.
@@ -118,6 +117,20 @@
             return this.data.UsersAddresses.Where(u => u.UserId == userId).Any(a => a.AddressId == addressId);
         }
 
-       
+        /// <summary>
+        /// Get all apartaments for specific address - asynchronous.
+        /// </summary>
+        /// <param name="addressId"></param>
+        /// <returns>Collection of ApartamentViewModel</returns>
+        public async Task<IEnumerable<ApartamentViewModel>> GetAllApartamentsAsync(int? addressId)
+        {
+            return await this.data.Apartaments.Where(a => a.AddressId == addressId)
+                                              .Select(a => new ApartamentViewModel()
+                                              {
+                                                  Number = a.Number,
+                                                  Signature = a.Signature,
+                                                  Owner = $"{a.Owner.FirstName} {a.Owner.LastName}"
+                                              }).ToListAsync();
+        }
     }
 }

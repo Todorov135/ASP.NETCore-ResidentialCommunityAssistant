@@ -1,6 +1,5 @@
 ﻿namespace ResidentialCommunityAssistant.Data.Models
-{
-    using Microsoft.AspNetCore.Identity;
+{    
     using System.ComponentModel.DataAnnotations;
     using static Common.GlobalConstants;
 
@@ -28,7 +27,7 @@
         /// Owner of apartament.
         /// </summary>
         public string? OwnerId { get; set; }
-        public virtual IdentityUser? Owner { get; set; }
+        public virtual ExtendedUser? Owner { get; set; }
 
         /// <summary>
         /// Apartament`s building.

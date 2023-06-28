@@ -1,5 +1,5 @@
 ﻿namespace ResidentialCommunityAssistant.Services.Contracts.Owner
-{
+{   
     using ResidentialCommunityAssistant.Services.Models.Owner;
 
     public interface IOwnerService
@@ -10,5 +10,6 @@
         Task<IEnumerable<LocationTypeViewModel>> GetAllLocationTypesAsync();        
         Task AddAddressToUserAsync(string userId, int addressId);
         bool IsAddressInUsersList(string userId, int addressId);
+        Task<IEnumerable<ApartamentViewModel>> GetAllApartamentsAsync(int? addressId);
     }
 }

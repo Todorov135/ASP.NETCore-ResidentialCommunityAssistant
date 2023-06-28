@@ -2,26 +2,29 @@
 {
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
-    using Microsoft.EntityFrameworkCore.Metadata.Builders;    
+    using Microsoft.EntityFrameworkCore.Metadata.Builders;
+    using ResidentialCommunityAssistant.Data.Models;
 
-    internal class UserConfiguration : IEntityTypeConfiguration<IdentityUser>
+    internal class UserConfiguration : IEntityTypeConfiguration<ExtendedUser>
     {
-        public void Configure(EntityTypeBuilder<IdentityUser> builder)
+        public void Configure(EntityTypeBuilder<ExtendedUser> builder)
         {
             var users = UserSeeder();
 
             builder.HasData(users);
         }
 
-        private IEnumerable<IdentityUser> UserSeeder()
+        private IEnumerable<ExtendedUser> UserSeeder()
         {
-            var users = new List<IdentityUser>();
+            var users = new List<ExtendedUser>();
 
-            PasswordHasher<IdentityUser> hasher = new PasswordHasher<IdentityUser>();
+            PasswordHasher<ExtendedUser> hasher = new PasswordHasher<ExtendedUser>();
 
-            IdentityUser homeManager = new IdentityUser()
+            ExtendedUser homeManager = new ExtendedUser()
             {
                 Id = "8815d5cc-c403-43e8-b2d3-40f57a8d1d61",
+                FirstName = "Тодор",
+                LastName = "Тодоров",
                 UserName = "homeManager@mail.comr",
                 NormalizedUserName = "homeManager@mail.com".ToUpper(),
                 Email = "homeManager@mail.com",
@@ -30,9 +33,11 @@
             homeManager.PasswordHash = hasher.HashPassword(homeManager, "homemanager");
             users.Add(homeManager);
 
-            IdentityUser firstOwner = new IdentityUser()
+            ExtendedUser firstOwner = new ExtendedUser()
             {
                 Id = "579b52e0-38e4-4f41-a30f-31e72767c536",
+                FirstName = "Иван",
+                LastName = "Иванов",
                 UserName = "firstOwner@mail.com",
                 NormalizedUserName = "firstOwner@mail.com".ToUpper(),
                 Email = "firstOwner@mail.com",
@@ -41,9 +46,11 @@
             firstOwner.PasswordHash = hasher.HashPassword(firstOwner, "firstOwner");
             users.Add(firstOwner);
 
-            IdentityUser secondOwner = new IdentityUser()
+            ExtendedUser secondOwner = new ExtendedUser()
             {
                 Id = "88d33982-06d8-43f0-b809-7d6ed7f3ab23",
+                FirstName = "Петър",
+                LastName = "Петров",
                 UserName = "secondOwner@mail.com",
                 NormalizedUserName = "secondOwner@mail.com".ToUpper(),
                 Email = "secondOwner@mail.com",

@@ -5,7 +5,7 @@
     using ResidentialCommunityAssistant.Data.Configuration;
     using ResidentialCommunityAssistant.Data.Models;
 
-    public class CommunityAssistantDBContext : IdentityDbContext
+    public class CommunityAssistantDBContext : IdentityDbContext<ExtendedUser>
     {
         public CommunityAssistantDBContext(DbContextOptions<CommunityAssistantDBContext> options)
             : base(options)
@@ -15,7 +15,7 @@
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Apartament> Apartaments { get; set; }
         public DbSet<City> Cities { get; set; }
-        public DbSet<CommunityTopic> CommunityTopics { get; set; }
+        public DbSet<CommunityTopic> CommunityTopics { get; set; }       
         public DbSet<UserAddress> UsersAddresses { get; set; }
         public DbSet<LocalityType> LocalityTypes { get; set; }
         public DbSet<LocationType> LocationTypes { get; set; }

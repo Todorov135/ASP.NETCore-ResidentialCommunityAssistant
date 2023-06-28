@@ -1,6 +1,5 @@
 ﻿namespace ResidentialCommunityAssistant.Data.Models
 {
-    using Microsoft.AspNetCore.Identity;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using static Common.GlobalConstants;
@@ -47,6 +46,6 @@
         [Required]
         [ForeignKey(nameof(Creator))]
         public string CreatorId { get; set; } = null!;
-        public virtual IdentityUser Creator { get; set; } = null!;
+        public virtual ExtendedUser Creator { get; set; } = null!;
     }
 }

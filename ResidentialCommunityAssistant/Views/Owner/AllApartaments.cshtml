@@ -1,0 +1,12 @@
+﻿@model IEnumerable<ApartamentViewModel>
+
+<h2>All Apartamets</h2>
+
+@foreach (var apartament in Model)
+{
+    <div class="card-body text-center border">
+        <h6>Апартамент: @apartament.Signature - @apartament.Number</h6>
+        <p>Собственик: @apartament.Owner</p>
+        
+    </div>
+}

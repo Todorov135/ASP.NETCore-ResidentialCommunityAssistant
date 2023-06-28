@@ -2,13 +2,11 @@
 {
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using Newtonsoft.Json.Linq;
-    using NuGet.Packaging.Signing;
+    using ResidentialCommunityAssistant.Data.Models;
     using ResidentialCommunityAssistant.Extensions;
     using ResidentialCommunityAssistant.Services.Contracts.HomeManager;
     using ResidentialCommunityAssistant.Services.Contracts.Owner;
     using ResidentialCommunityAssistant.Services.Models.HomeManager;
-    using System.Diagnostics;
     using System.Security.Claims;
 
     public class HomeManagerController : BaseController
@@ -16,13 +14,13 @@
         private string constClaimName = "HomeManagerOfAddresses";
 
         private readonly RoleManager<IdentityRole> roleManager;
-        private readonly UserManager<IdentityUser> userManager;
+        private readonly UserManager<ExtendedUser> userManager;
         private readonly IOwnerService ownerService;
         private readonly IHomeManagerService homeMangerService;
 
         public HomeManagerController(
             RoleManager<IdentityRole> roleManager,
-            UserManager<IdentityUser> userManager,
+            UserManager<ExtendedUser> userManager,
             IHomeManagerService homeMangerService,
             IOwnerService ownerService)
         {
@@ -58,20 +56,19 @@
 
                 return View(model);
             }
-            
+
             var user = await GetIdentityUser(User.Id());
-            int addressId = 0;
 
             if (user != null && model != null)
             {
-                addressId = await homeMangerService.AddAddressAsync(model);
+               int addressId = await homeMangerService.AddAddressAsync(model);
 
                 string claimName = constClaimName;
                 string claimValue = addressId.ToString();
 
                 var allUserClaims = await userManager.GetClaimsAsync(user);
                 var existingClaim = allUserClaims.FirstOrDefault(c =>c.Type == claimName);
-
+                await this.ownerService.AddAddressToUserAsync(this.User.Id(), addressId);
 
                 if (existingClaim != null)
                 {
@@ -136,7 +133,7 @@
             return View(apartamentsToAdd);
         }
 
-        private async Task<IdentityUser> GetIdentityUser(string userId)
+        private async Task<ExtendedUser> GetIdentityUser(string userId)
         {
             return await userManager.FindByIdAsync(userId);
         }

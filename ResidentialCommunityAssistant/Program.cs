@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ResidentialCommunityAssistant.Data;
+using ResidentialCommunityAssistant.Data.Models;
 using ResidentialCommunityAssistant.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,18 +18,27 @@ builder.Services.AddDbContext<CommunityAssistantDBContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+
+builder.Services.AddIdentity<ExtendedUser, IdentityRole>(options =>
 {
     options.SignIn.RequireConfirmedAccount = passwordConfigDevEnv.GetValue<bool>("RequireConfirmedAccount");
     options.Password.RequireDigit = passwordConfigDevEnv.GetValue<bool>("RequireDigit");
     options.Password.RequireNonAlphanumeric = passwordConfigDevEnv.GetValue<bool>("RequireNonAlphanumeric");
     options.Password.RequireUppercase = passwordConfigDevEnv.GetValue<bool>("RequireUppercase");
-})
+})    
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<CommunityAssistantDBContext>();
-    
 
+builder.Services.AddRazorPages();
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDistributedMemoryCache();
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromSeconds(10);
+    options.Cookie.IsEssential = true;
+});
 builder.Services.AddApplicationService();
 
 var app = builder.Build();
@@ -51,6 +61,8 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",
