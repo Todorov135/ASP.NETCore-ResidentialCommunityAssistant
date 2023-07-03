@@ -1,26 +1,42 @@
-﻿@model IEnumerable<CommunityTopicViewModel>
+﻿@using Microsoft.AspNetCore.Identity;
+@model IEnumerable<CommunityTopicViewModel>
+@inject UserManager<ExtendedUser> userManager
 
+@{
+    var userId = userManager.GetUserId(this.User);    
+}
 <h1>Community topics</h1>
 
-<div class="row">
-    <div class="form-group col-md-3 d-flex justify-content-between">
+<div>
+    <div class="form-group col-md-3">
         <div class="form-group">
-                    
-                @foreach (var topic in Model)
-                {
-                    <div class="card-body text-center">
-                        <h4>Тема: @topic.Title</h4>
-                        <p>Описание: @topic.Description</p>
-                        <p>Създадено: @topic.CreatedOn</p>
-                        <p>Създател: @topic.CreatorName</p>
-                    </div>
-                }
-          
+
+            @foreach (var topic in Model)
+            {
+                <div class="card-body text-center">
+                    <h4>Тема: @topic.Title</h4>
+                    <p>Описание: @topic.Description</p>
+                    <p>Създадено: @topic.CreatedOn</p>
+                    <p>Създател: @topic.CreatorName</p>
+                    @if (topic.CreatorId == userId)
+                        {
+                            <form class="input-group-sm " asp-controller="Owner" asp-action="EditCommunityTopic" asp-route-id="@topic.Id" method="get">
+                                <input type="submit" value="Промяна" class="fs-6 btn btn-warning mb-3 w-100 p-3 fw-bold" />
+                            </form>
+                           
+                        }
+                </div>
+            }
+
         </div>
     </div>
     <div class="form-group col-md-3 d-flex justify-content-between">
         <div class="form-group">
             <a asp-controller="Owner" asp-action="AllApartaments" class="btn btn-primary">Виж всички апартаменти</a>
         </div>
+        <div class="form-group">
+            <a asp-controller="Owner" asp-action="AddCommunityTopic" class="btn btn-primary">Добавете Вашата тема</a>
+        </div>
+
     </div>
 </div>

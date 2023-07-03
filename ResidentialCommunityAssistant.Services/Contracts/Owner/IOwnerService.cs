@@ -11,5 +11,8 @@
         Task AddAddressToUserAsync(string userId, int addressId);
         bool IsAddressInUsersList(string userId, int addressId);
         Task<IEnumerable<ApartamentViewModel>> GetAllApartamentsAsync(int? addressId);
+        Task AddCommunityTopicAsync(AddCommunityTopicViewModel communityTopic);
+        Task<CommunityTopicViewModel?> GetCommunityTopicAsync(int id);
+        Task EditCommunityTopic(CommunityTopicViewModel communityTopic);
     }
 }

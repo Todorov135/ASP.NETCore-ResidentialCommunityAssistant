@@ -1,12 +1,44 @@
 ﻿@model IEnumerable<ApartamentViewModel>
+@{
+    var claimsValues = User.Claims.FirstOrDefault(c => c.Type == "HomeManagerOfAddresses");
+}
 
 <h2>All Apartamets</h2>
 
 @foreach (var apartament in Model)
 {
     <div class="card-body text-center border">
-        <h6>Апартамент: @apartament.Signature - @apartament.Number</h6>
+        <h6>Апартамент: @apartament.Signature - @apartament.Number</h6>      
         <p>Собственик: @apartament.Owner</p>
-        
-    </div>
+
+        @{
+            var claims = claimsValues.Value.Split(", ");
+            bool isThisUserIsManagerOfCurrentAddress = false;
+            for (int i = 0; i < claims.Length; i++)
+            {
+                if (string.IsNullOrWhiteSpace(claims[i]))
+                {
+                    continue;
+                }
+                int parsedClaim = int.Parse(claims[i]);
+                if (parsedClaim == apartament.AddressId)
+                {
+                    isThisUserIsManagerOfCurrentAddress = true;
+                    break;
+                }
+            }
+            if (this.User.Identity.IsAuthenticated && isThisUserIsManagerOfCurrentAddress)
+            {
+                <form class="input-group-sm " asp-controller="HomeManager" asp-action="EditApartament" asp-route-id="@apartament.ApartamentId" method="get">
+                    <input type="submit" value="Промяна" class="btn btn-primary mb-2" />
+                </form>
+                <a class="btn btn-primary" href="@Url.Action("RemoveUserFromAddress", "HomeManager", new { apartamentId = apartament.ApartamentId})">Премахни потребител</a>
+                
+            }
+        }
+    </div>  
+    
+    
+   
 }
+

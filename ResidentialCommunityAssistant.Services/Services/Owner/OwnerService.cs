@@ -4,10 +4,9 @@
     using ResidentialCommunityAssistant.Data;
     using ResidentialCommunityAssistant.Data.Models;
     using ResidentialCommunityAssistant.Services.Contracts.Owner;
-    using ResidentialCommunityAssistant.Services.Models.HomeManager;
     using ResidentialCommunityAssistant.Services.Models.Owner;
     using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
+    using System.Linq;
     using System.Threading.Tasks;
 
     public class OwnerService : IOwnerService
@@ -58,14 +57,16 @@
         {
             return await this.data.CommunityTopics
                             .Where(a => a.AddressId == addressId)
+                            .OrderByDescending(d => d.CreatedOn)
                             .Select(t => new CommunityTopicViewModel()
                             {
                                 Id = t.Id,
                                 Title = t.Title,
                                 Description = t.Description,
                                 CreatedOn = t.CreatedOn.ToString("dd/MM/yyyy"),
-                                CreatorName = $"{t.Creator.FirstName} {t.Creator.LastName}"
-                            })
+                                CreatorName = $"{t.Creator.FirstName} {t.Creator.LastName}",
+                                CreatorId = t.CreatorId
+                            })                            
                             .ToListAsync();
                                                                
         }
@@ -129,8 +130,67 @@
                                               {
                                                   Number = a.Number,
                                                   Signature = a.Signature,
-                                                  Owner = $"{a.Owner.FirstName} {a.Owner.LastName}"
-                                              }).ToListAsync();
+                                                  Owner = a.Owner != null ? $"{a.Owner.FirstName} {a.Owner.LastName}" : "Няма въведен собственик.",
+                                                  ApartamentId = a.Id,
+                                                  AddressId = a.AddressId
+                                              })
+                                              .ToListAsync();
+        }
+
+        /// <summary>
+        /// Add topic in database, for specific address.
+        /// </summary>
+        /// <param name="communityTopic"></param>
+        public async Task AddCommunityTopicAsync(AddCommunityTopicViewModel communityTopic)
+        {
+            CommunityTopic ct = new CommunityTopic()
+            {
+                Title = communityTopic.Title,
+                Description = communityTopic.Description,
+                AddressId = communityTopic.AddressId,
+                CreatedOn = DateTime.Now,
+                CreatorId = communityTopic.CreatorId
+            };
+
+            await this.data.CommunityTopics.AddAsync(ct);
+            await this.data.SaveChangesAsync();
+        }
+
+        /// <summary>
+        /// Get first community topic by id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>CommunityTopicViewModel</returns>       
+        public async Task<CommunityTopicViewModel?> GetCommunityTopicAsync(int id)
+        {
+            return await this.data.CommunityTopics
+                                  .Where(ct => ct.Id == id)
+                                  .Select(ct => new CommunityTopicViewModel()
+                                  {
+                                      Id = ct.Id,
+                                      Title = ct.Title,
+                                      Description = ct.Description
+                                  })
+                                  .FirstOrDefaultAsync();
+        }
+
+        /// <summary>
+        /// Edit community topic.
+        /// </summary>
+        /// <param name="communityTopic"></param>        
+        public async Task EditCommunityTopic(CommunityTopicViewModel communityTopic)
+        {
+            var topicToEdit = await this.data.CommunityTopics.FindAsync(communityTopic.Id);
+
+            if (topicToEdit == null)
+            {
+                return;
+            }
+
+            topicToEdit.Title = communityTopic.Title;
+            topicToEdit.Description = communityTopic.Description;
+
+            await this.data.SaveChangesAsync();
         }
     }
 }

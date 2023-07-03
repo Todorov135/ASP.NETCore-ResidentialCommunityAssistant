@@ -1,0 +1,28 @@
+﻿@model CommunityTopicViewModel
+
+<h2>Edit community topic</h2>
+
+<form asp-controller="Owner" asp-action="EditCommunityTopic">
+    <div class="form-group">
+
+        <div class="form-group">
+            <div>
+                <label asp-for="Title"></label>
+            </div>
+            <input type="text" asp-for="Title" style="min-width:25%">
+            <span asp-validation-for="Title" class="small text-danger"></span>
+        </div>
+        <div class="form-group">
+            <div>
+                <label asp-for="Description"></label>
+            </div>
+            <textarea asp-for="Description"></textarea>
+            <span asp-validation-for="Description" class="small text-danger"></span>
+        </div>
+        <input type="submit" value="Промяна">
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

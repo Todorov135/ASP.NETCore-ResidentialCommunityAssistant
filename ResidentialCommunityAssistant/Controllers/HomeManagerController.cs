@@ -1,5 +1,6 @@
 ﻿namespace ResidentialCommunityAssistant.Controllers
 {
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using ResidentialCommunityAssistant.Data.Models;
@@ -7,11 +8,12 @@
     using ResidentialCommunityAssistant.Services.Contracts.HomeManager;
     using ResidentialCommunityAssistant.Services.Contracts.Owner;
     using ResidentialCommunityAssistant.Services.Models.HomeManager;
+    using ResidentialCommunityAssistant.Services.Models.Owner;
     using System.Security.Claims;
 
     public class HomeManagerController : BaseController
     {
-        private string constClaimName = "HomeManagerOfAddresses";
+        private const string constClaimName = "HomeManagerOfAddresses";
 
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly UserManager<ExtendedUser> userManager;
@@ -29,12 +31,7 @@
             this.homeMangerService = homeMangerService;
             this.ownerService = ownerService;
         }
-
-        public IActionResult Index()
-        {
-            return View();
-        }
-              
+            
 
         [HttpGet]
         public async Task<IActionResult> AddAddress()
@@ -95,6 +92,7 @@
         }
 
         [HttpGet]
+        [Authorize(Roles = "HomeManager")]
         public IActionResult AddAddressSpecifics()
         {
             var apartamentsToAdd = new AllApartamentsToAddViewModel();           
@@ -103,6 +101,7 @@
         }
 
         [HttpPost]
+        [Authorize(Roles = "HomeManager")]
         public async Task<IActionResult> AddAddressSpecifics(AllApartamentsToAddViewModel apartamentsToAdd)
         {
             if (!ModelState.IsValid)
@@ -133,9 +132,42 @@
             return View(apartamentsToAdd);
         }
 
+        [HttpGet]
+        [Authorize(Roles = "HomeManager")]
+        public async Task<IActionResult> EditApartament(int id)
+        {
+            var apartamentToEdit = await this.homeMangerService.GetApartamentByIdAsync(id);
+            return View(apartamentToEdit);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "HomeManager")]
+        public async Task<IActionResult> EditApartament(ApartamentViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            await this.homeMangerService.EditApartament(model);
+
+            return RedirectToAction("AllApartaments", "Owner");
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "HomeManager")]
+        public IActionResult RemoveUserFromAddress(int apartamentId)
+        {
+            this.homeMangerService.RemoveUserFromAddress(apartamentId);
+
+            return RedirectToAction("AllApartaments", "Owner");
+        }
         private async Task<ExtendedUser> GetIdentityUser(string userId)
         {
             return await userManager.FindByIdAsync(userId);
         }
+
+
+        
     }
 }

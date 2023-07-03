@@ -25,9 +25,13 @@
                 <input asp-for="@Model.CurrentApartamentToAdd.Number" class="form-control" placeholder="3" type="number">
                 <span asp-validation-for="@Model.CurrentApartamentToAdd.Number" class="small text-danger"></span>
             </div>
-           
+           @*TODO: To make screen follow input for better UI*@
             <div class="text-center">
                 <input class="btn btn-primary mt-3" type="submit" value="Добави" />
+            </div>
+            
+            <div class="text-center">
+                <a asp-controller="Owner" asp-action="AllApartaments" class="btn btn-primary mt-3">Приключих с въвеждането</a>
             </div>
         </form>
     </div>

@@ -11,9 +11,7 @@
 
         private readonly IOwnerService ownerService;
         
-        public OwnerController(
-            IOwnerService ownerService,
-            IHttpContextAccessor httpContext)
+        public OwnerController(IOwnerService ownerService)
         {
             this.ownerService = ownerService;            
         }
@@ -44,20 +42,23 @@
             {
                 return View("Error");
             }
+            HttpContext.Session.SetInt32(sessionAddressId, selectedAddressId);
 
             return RedirectToAction(nameof(CommunityTopics), new { addressId = selectedAddressId});            
         }
 
         [HttpGet]
-        public async Task<IActionResult> CommunityTopics(int addressId)
+        public async Task<IActionResult> CommunityTopics()
         {
-            HttpContext.Session.SetInt32(sessionAddressId, addressId);
+            int sessionddressId = HttpContext.Session.GetInt32(sessionAddressId) ?? 0;
+            if (sessionddressId != 0)
+            {
+                var communityTopics = await this.ownerService.GetAllTopicsForAddressAsync(sessionddressId);
+                return View(communityTopics);
+            }
 
-            var communityTopics = await this.ownerService.GetAllTopicsForAddressAsync(addressId);
-            return View(communityTopics);
+            return View();
         }
-
-       
 
         [HttpGet]
         public async Task<IActionResult> AddAddressToUser(int id)
@@ -69,7 +70,7 @@
                 await this.ownerService.AddAddressToUserAsync(userId, id);
             }
 
-            return RedirectToAction(nameof(CommunityTopics));
+            return RedirectToAction(nameof(ChooseAddress));
         }
 
         [HttpGet]
@@ -84,5 +85,53 @@
             }
             return View("Error");
         }
+
+        [HttpGet]
+        public IActionResult AddCommunityTopic()
+        {
+            var communityTopic = new AddCommunityTopicViewModel();
+
+            return View(communityTopic);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddCommunityTopic(AddCommunityTopicViewModel model)
+        {
+            int addressId = HttpContext.Session.GetInt32(sessionAddressId) ?? 0;
+            model.AddressId = addressId;
+            model.CreatorId = this.User.Id(); 
+
+            if (!ModelState.IsValid || addressId == 0)
+            {
+                return View(model);
+            }
+
+            await this.ownerService.AddCommunityTopicAsync(model);  
+            
+            return RedirectToAction(nameof(CommunityTopics));
+           
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditCommunityTopic(int id)
+        {
+            var communityTopic = await this.ownerService.GetCommunityTopicAsync(id);
+
+            return View(communityTopic);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditCommunityTopic(CommunityTopicViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            await this.ownerService.EditCommunityTopic(model);
+
+            return RedirectToAction(nameof(CommunityTopics));
+        }
+
     }
 }

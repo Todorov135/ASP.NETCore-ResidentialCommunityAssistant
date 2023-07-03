@@ -5,6 +5,7 @@
     using ResidentialCommunityAssistant.Data.Models;
     using ResidentialCommunityAssistant.Services.Contracts.HomeManager;
     using ResidentialCommunityAssistant.Services.Models.HomeManager;
+    using ResidentialCommunityAssistant.Services.Models.Owner;
     using System.Collections.Generic;
 
     public class HomeManagerService : IHomeManagerService
@@ -55,6 +56,24 @@
         }
 
         /// <summary>
+        /// Edit existing apartament.
+        /// </summary>
+        /// <param name="apartament"></param>        
+        public async Task EditApartament(ApartamentViewModel apartament)
+        {
+            Apartament apartamentToEdit = await this.data.Apartaments.FindAsync(apartament.ApartamentId);
+            if (apartamentToEdit == null)
+            {
+                return;
+            }
+
+            apartamentToEdit.Number = apartament.Number;
+            apartamentToEdit.Signature = apartament.Signature;
+
+            await this.data.SaveChangesAsync();
+        }
+
+        /// <summary>
         /// Get all apartaments for address by Id - asynchronous.
         /// </summary>
         /// <param name="addressId"></param>
@@ -73,6 +92,44 @@
                                   .OrderBy(a => a.Signature)
                                   .ThenBy(n => n.Number)
                                   .ToListAsync();
+        }
+
+        /// <summary>
+        /// Get apartament by Id - asynchronous.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>ApartamentViewModel</returns>
+        public async Task<ApartamentViewModel?> GetApartamentByIdAsync(int? id)
+        {
+            return await this.data.Apartaments
+                                  .Where(a => a.Id == id)
+                                  .Select(a => new ApartamentViewModel()
+                                  {
+                                      AddressId = a.AddressId,
+                                      ApartamentId = a.Id,
+                                      Number = a.Number,
+                                      Owner = $"{a.Owner.FirstName} {a.Owner.LastName}",
+                                      Signature = a.Signature
+                                  })
+                                  .FirstOrDefaultAsync();
+        }
+
+        /// <summary>
+        /// Remove apartament owner from address.
+        /// </summary>
+        /// <param name="apartamentId"></param>
+        /// <param name="addressId"></param>
+        public void RemoveUserFromAddress(int apartamentId)
+        {
+            Apartament? apartament = this.data.Apartaments.Where(a => a.Id == apartamentId).FirstOrDefault();
+            if (apartament == null)
+            {
+                return;
+            }
+            apartament.Owner = null;
+            apartament.OwnerId = null;
+
+            this.data.SaveChanges();
         }
 
         /// <summary>
