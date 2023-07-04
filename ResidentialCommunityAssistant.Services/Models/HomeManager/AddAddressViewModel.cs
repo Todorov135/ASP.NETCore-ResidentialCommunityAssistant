@@ -4,7 +4,8 @@
     using System.ComponentModel.DataAnnotations;
     using static ResidentialCommunityAssistant.Data.Common.GlobalConstants;
     public class AddAddressViewModel
-    { 
+    {      
+
         [Display(Name = "Тип на населеното място")]
         [Required]
         public int CityLocalityId { get; set; }

@@ -130,10 +130,12 @@
                                               {
                                                   Number = a.Number,
                                                   Signature = a.Signature,
-                                                  Owner = a.Owner != null ? $"{a.Owner.FirstName} {a.Owner.LastName}" : "Няма въведен собственик.",
+                                                  Owner = $"{a.Owner.FirstName} {a.Owner.LastName}",
                                                   ApartamentId = a.Id,
                                                   AddressId = a.AddressId
                                               })
+                                              .OrderBy(s => s.Signature)
+                                              .OrderBy(n => n.Number)
                                               .ToListAsync();
         }
 

@@ -17,6 +17,7 @@
         public DbSet<City> Cities { get; set; }
         public DbSet<CommunityTopic> CommunityTopics { get; set; }       
         public DbSet<UserAddress> UsersAddresses { get; set; }
+        public DbSet<HomeManagerApproval> HomeManagersApprovals { get; set; }
         public DbSet<LocalityType> LocalityTypes { get; set; }
         public DbSet<LocationType> LocationTypes { get; set; }
 

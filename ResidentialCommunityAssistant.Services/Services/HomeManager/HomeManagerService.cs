@@ -84,7 +84,8 @@
             return await this.data.Apartaments
                                   .Where(a => a.AddressId == addressId)
                                   .Select(ap => new AddApartamentViewModel()
-                                  {
+                                  {    
+                                      Id = ap.Id,                                  
                                       Number = ap.Number,
                                       Signature = ap.Signature,
                                       OwnerId = ap.OwnerId

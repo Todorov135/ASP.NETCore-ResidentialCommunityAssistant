@@ -11,6 +11,10 @@
                     <p>Апартамент: @apartament.Signature</p>
                     <p>Номер: @apartament.Number</p>
                 </div>
+                <form method="post" asp-controller="HomeManager" asp-action="AddAddressSpecifics">
+                    <input type="hidden" asp-route="@apartament.Id"/>
+                    <input type="submit" value="Редактиране"/>
+                </form>
             </div>
         }
 

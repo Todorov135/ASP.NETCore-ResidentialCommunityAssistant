@@ -5,6 +5,8 @@
 
     public class AddApartamentViewModel
     {
+        public int Id { get; set; }
+
         [Required]
         public int AddressId { get; set; }
 
