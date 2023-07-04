@@ -24,7 +24,7 @@
                 Name = "Цар Борис III-ти Обединител",
                 Number = "37",
                 LocationTypeId = 2,
-                CityId = 1
+                CityId = 1                
             };
             addresses.Add(addressPlovdiv);
 

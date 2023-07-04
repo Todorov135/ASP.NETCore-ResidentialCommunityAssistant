@@ -25,7 +25,7 @@
                 Id = "8815d5cc-c403-43e8-b2d3-40f57a8d1d61",
                 FirstName = "Тодор",
                 LastName = "Тодоров",
-                UserName = "homeManager@mail.comr",
+                UserName = "homeManager@mail.com",
                 NormalizedUserName = "homeManager@mail.com".ToUpper(),
                 Email = "homeManager@mail.com",
                 NormalizedEmail = "homeManager@mail.com".ToUpper()                

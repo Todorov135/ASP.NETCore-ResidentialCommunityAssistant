@@ -1,6 +1,8 @@
 ﻿@model IEnumerable<ApartamentViewModel>
 @{
     var claimsValues = User.Claims.FirstOrDefault(c => c.Type == "HomeManagerOfAddresses");
+    bool isThisUserIsManagerOfCurrentAddress = false;
+    int addressId = 0;
 }
 
 <h2>All Apartamets</h2>
@@ -26,7 +28,6 @@
             {
                 var claims = claimsValues.Value.Split(", ");
 
-                bool isThisUserIsManagerOfCurrentAddress = false;
                 for (int i = 0; i < claims.Length; i++)
                 {
                     if (string.IsNullOrWhiteSpace(claims[i]))
@@ -36,6 +37,7 @@
                     int parsedClaim = int.Parse(claims[i]);
                     if (parsedClaim == apartament.AddressId)
                     {
+                        addressId = apartament.AddressId;
                         isThisUserIsManagerOfCurrentAddress = true;
                         break;
                     }
@@ -53,29 +55,17 @@
         }
     </div>  
 }
-@if (claimsValues != null)
+@if (isThisUserIsManagerOfCurrentAddress)
 {
-    <button id="addApartamentBtn">Добави апартамент</button>
+    <button id="addApartamentBtn" onclick="addApartament()">Добави апартамент</button>
     <div id="addApartamentContainer" style="display:none">
         <div id="addApartamentSpecifics">
             <input type="text" id="signature" placeholder="Сигнатура на апартамент">
             <input type="number" id="number" placeholder="Номер на апартамент">
+            <input type="hidden" id="currentAddressId" value="@addressId">
             <button id="saveButton">Запази</button>
         </div>
     </div>
 }
 
-<script>
-    let addApBtn = document.getElementById(addApartamentBtn);
-    addApBtn.addEventListener('click, addApartamentSpecific)
-
-       function addApartamentSpecific(event) {
-           //if (event) {
-           //    event.preventDefault();
-           //}
-
-
-           let addContainer = document.getElementById('addApartamentContainer');
-           addContainer.style.display = 'block';
-       }
-</script>
+<script src="~/js/Owner/АddApartament.js"></script>
