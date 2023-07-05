@@ -1,4 +1,4 @@
-﻿const URL_TO_SEND = "/Owner/api/apartments";
+﻿const URL_TO_SEND = 'https://localhost:7199/Owner/api/apartament';
 function addApartament() {
    
     let addApBtn = document.getElementById("addApartamentBtn");
@@ -30,9 +30,9 @@ function addApartament() {
         }
         let httpHeader = {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            //headers: {
+            //    'Content-Type': 'application/json'
+            //},
             body: JSON.stringify(data)
         }
 
