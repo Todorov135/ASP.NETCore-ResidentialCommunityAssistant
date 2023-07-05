@@ -1,19 +1,11 @@
-﻿const URL_TO_SEND = 'https://localhost:7199/Owner/api/apartament';
-function addApartament() {
-   
+﻿function addApartament() {
     let addApBtn = document.getElementById("addApartamentBtn");
-    addApBtn.addEventListener("click", addApartamentSpecific);
-
-    function addApartamentSpecific(event) {
-        event.preventDefault();
-
-        let addContainer = document.getElementById('addApartamentContainer');
-        addContainer.style.display = 'block';
-        addApBtn.style.display = 'none';
-
-        let saveBtn = document.getElementById("saveButton");
-        saveBtn.addEventListener("click", saveApartamentInDataBase);
-    }
+    let addContainer = document.getElementById('addApartamentContainer');
+    addContainer.style.display = 'block';
+    addApBtn.style.display = 'none';
+        
+    let saveBtn = document.getElementById("saveButton");
+    saveBtn.addEventListener("click", saveApartamentInDataBase);
 
     function saveApartamentInDataBase(event) {
         event.preventDefault();
@@ -30,13 +22,13 @@ function addApartament() {
         }
         let httpHeader = {
             method: 'POST',
-            //headers: {
-            //    'Content-Type': 'application/json'
-            //},
+            headers: {
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify(data)
         }
 
-        fetch(URL_TO_SEND, httpHeader)
+        fetch('https://localhost:7199/api/apartament', httpHeader)
             .then(response => {
                 if (response.ок) {
                     console.log('Апартаментът е създаден успешно.');
