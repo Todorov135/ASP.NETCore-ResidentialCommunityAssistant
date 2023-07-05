@@ -5,7 +5,7 @@
     using ResidentialCommunityAssistant.Services.Models.HomeManager;
 
     [ApiController]
-    [Route("/Owner/api/apartament")]
+    [Route("/api/apartament")]
     public class OwnerController : ControllerBase
     {
         private readonly IHomeManagerService homeManagerService;
