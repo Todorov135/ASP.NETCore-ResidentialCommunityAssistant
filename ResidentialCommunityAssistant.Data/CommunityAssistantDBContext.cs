@@ -16,10 +16,12 @@
         public DbSet<Apartament> Apartaments { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<CommunityTopic> CommunityTopics { get; set; }       
-        public DbSet<UserAddress> UsersAddresses { get; set; }
         public DbSet<HomeManagerApproval> HomeManagersApprovals { get; set; }
         public DbSet<LocalityType> LocalityTypes { get; set; }
         public DbSet<LocationType> LocationTypes { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<UserAddress> UsersAddresses { get; set; }
+        public DbSet<Order> UsersProducts { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -33,6 +35,7 @@
             builder.ApplyConfiguration(new CommunityTopicConfiguration());
             builder.ApplyConfiguration(new LocalityTypeConfiguration());
             builder.ApplyConfiguration(new LocationTypeConfiguration());
+            builder.ApplyConfiguration(new ProductConfiguration());
             builder.ApplyConfiguration(new RoleConfiguration());
             builder.ApplyConfiguration(new RoleUserConfiguration());
             builder.ApplyConfiguration(new UserAddressConfiguration());

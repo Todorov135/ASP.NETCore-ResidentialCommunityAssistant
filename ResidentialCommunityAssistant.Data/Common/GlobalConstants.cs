@@ -40,5 +40,12 @@
         public const int ExtendedUserLastNameMinLength = 1;
         public const int ExtendedUserLastNameMaxLength = 24;
 
+        //Product
+        public const int ProductNameMinLength = 2;
+        public const int ProductNameMaxLength = 64;
+        public const int ProductDescriptionMinLength = 4;
+        public const int ProductDescriptionMaxLength = 128;
+        public const int ProductImgURLMinLength = 8;
+        public const int ProductImgURLMaxLength = 2048;
     }
 }

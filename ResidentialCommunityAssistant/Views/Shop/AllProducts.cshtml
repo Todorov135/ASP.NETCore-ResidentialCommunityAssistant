@@ -1,0 +1,24 @@
+﻿@model ICollection<ProductViewModel>
+
+<h2>All products</h2>
+
+<div class="row">
+    <div class="card-group">
+        @foreach (var product in Model)
+        {
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="@product.ImgURL" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">@product.Name</h5>
+                    <p class="card-text">@product.Description</p>
+                    <p class="card-text">@product.Price лв.</p>
+                    <form  method="post">
+                        <input asp-controller="Shop" asp-action="AddToShoppingCard" asp-route-id ="@product.Id" type="submit" value="Добави в количка" />
+                    </form>
+                </div>
+            </div>
+
+        }
+    </div>
+</div>
+
