@@ -11,7 +11,9 @@
         [ForeignKey(nameof(User))]
         public string UserId { get; set; } = null!;
         public virtual ExtendedUser User { get; set; } = null!;
-        public virtual ICollection<Product> Products { get; set; } = new List<Product>();
-        public bool IsPurchased { get; set; }
+
+        [Required]
+        public DateTime CreatedOn { get; set; }
+
     }
 }
