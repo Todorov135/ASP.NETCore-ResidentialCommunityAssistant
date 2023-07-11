@@ -22,7 +22,7 @@
                 {
                     Id = 1,
                     Name = "Пиратско знаме",
-                    Description = "Ако използвате UTorent, това е знамето за Вас.",
+                    Description = "Ако използвате uTorrent, това е знамето за Вас.",
                     ImgURL = "https://shop.flagfactory.bg/image/cache/catalog/products/flags/pirates/pirates_mockups/pirate2_mockup-600x360.png",
                     Price = 10.00M,
                     Quantity = 100

@@ -27,5 +27,7 @@
         [Required]
         [Precision(5,2)]
         public decimal Price { get; set; }
+
+        public virtual IEnumerable<OrderProduct> OrdersProducts { get; set; } = new List<OrderProduct>();
     }
 }

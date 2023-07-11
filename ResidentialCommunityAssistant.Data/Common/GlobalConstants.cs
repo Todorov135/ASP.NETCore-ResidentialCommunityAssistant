@@ -47,5 +47,9 @@
         public const int ProductDescriptionMaxLength = 128;
         public const int ProductImgURLMinLength = 8;
         public const int ProductImgURLMaxLength = 2048;
+
+        //OrderCache
+        public const int OrderCacheMinValue = 1;
+        public const int OrderCacheMaxValue = 20;
     }
 }

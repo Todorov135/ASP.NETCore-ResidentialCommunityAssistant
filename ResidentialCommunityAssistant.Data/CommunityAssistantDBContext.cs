@@ -2,6 +2,7 @@
 {
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.DependencyInjection;
     using ResidentialCommunityAssistant.Data.Configuration;
     using ResidentialCommunityAssistant.Data.Models;
 
@@ -20,14 +21,22 @@
         public DbSet<LocalityType> LocalityTypes { get; set; }
         public DbSet<LocationType> LocationTypes { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderCache> OrdersCaches { get; set; }
+        public DbSet<OrderProduct> OrdersProducts { get; set; }
         public DbSet<UserAddress> UsersAddresses { get; set; }
-        public DbSet<Order> UsersProducts { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<UserAddress>()
                    .HasKey(ha => new { ha.UserId, ha.AddressId });
+
+            builder.Entity<OrderCache>()
+                   .HasKey(oc => new { oc.UserId, oc.ProductId });
+
+            builder.Entity<OrderProduct>()
+                   .HasKey(op => new { op.OrderId, op.ProductId });
             
             builder.ApplyConfiguration(new AddressConfiguration());
             builder.ApplyConfiguration(new ApartamentConfiguration());

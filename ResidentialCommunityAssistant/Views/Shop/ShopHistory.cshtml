@@ -1,0 +1,9 @@
+﻿@model IEnumerable<OrderNumberViewModel>
+<h2>Shop history</h2>
+
+@foreach (var order in Model)
+{
+    <form method="post" asp-controller="Shop" asp-action="ShopHistoryDetails" asp-route-id="@order.RegularId">
+        <input type="submit" value="@order.OrderName" />
+    </form>
+}
