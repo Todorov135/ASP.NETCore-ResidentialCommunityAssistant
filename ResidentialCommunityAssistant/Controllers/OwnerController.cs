@@ -16,12 +16,6 @@
             this.ownerService = ownerService;            
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-           
-
         [HttpGet]
         public async Task<IActionResult> ChooseAddress()
         {
@@ -74,9 +68,18 @@
         }
 
         [HttpGet]
-        public async Task<IActionResult> AllApartaments()
+        public async Task<IActionResult> AllApartaments(int? givenAddressId)
         {
-            int? addressId = HttpContext.Session.GetInt32(sessionAddressId);
+            int? addressId;
+            if (givenAddressId != null)
+            {
+                addressId = givenAddressId;
+            }
+            else
+            {
+               addressId = HttpContext.Session.GetInt32(sessionAddressId);
+            }
+             
 
             if (addressId != null)
             {

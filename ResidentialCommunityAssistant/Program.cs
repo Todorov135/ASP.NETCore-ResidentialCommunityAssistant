@@ -65,6 +65,10 @@ app.UseAuthorization();
 app.UseSession();
 
 app.MapControllerRoute(
+    name: "ShopAdministrator",
+    pattern: "{area:exists}/{controller=ShopÌanagement}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();

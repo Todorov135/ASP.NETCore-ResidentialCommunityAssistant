@@ -1,8 +1,17 @@
-﻿@model IEnumerable<ApartamentViewModel>
+﻿@using Microsoft.AspNetCore.Identity;
+@model IEnumerable<ApartamentViewModel>
+@inject UserManager<ExtendedUser> userManager;
 @{
     var claimsValues = User.Claims.FirstOrDefault(c => c.Type == "HomeManagerOfAddresses");
     bool isThisUserIsManagerOfCurrentAddress = false;
     int addressId = 0;
+
+    bool isThisUserIsPartOfCommunity = false;
+    string userId = userManager.GetUserId(this.User);
+    if (Model.Any(a => a.OwnerId == userId))
+    {
+        isThisUserIsPartOfCommunity = true;
+    }
 }
 
 <h2>All Apartamets</h2>
@@ -10,7 +19,7 @@
 @foreach (var apartament in Model)
 {
     <div class="card-body text-center border">
-        <h6>Апартамент: @apartament.Signature - @apartament.Number</h6>      
+        <h6>Апартамент: @apartament.Signature - @apartament.Number</h6>
         @if (string.IsNullOrWhiteSpace(apartament.Owner))
         {
             <p>Собственик: Апартаментът няма добавен собственик.</p>
@@ -18,10 +27,11 @@
         }
         else
         {
-            if (!string.IsNullOrWhiteSpace(apartament.Owner))
+            if (isThisUserIsPartOfCommunity)
             {
-                <p>Собственик: @apartament.Owner</p>                
+                <p>Собственик: @apartament.Owner</p>
             }
+            
         }
         @{
             if (claimsValues != null)
@@ -51,9 +61,9 @@
                     <a class="btn btn-primary" href="@Url.Action("RemoveUserFromAddress", "HomeManager", new { apartamentId = apartament.ApartamentId})">Премахни потребител</a>
                 }
             }
-            
+
         }
-    </div>  
+    </div>
 }
 @if (isThisUserIsManagerOfCurrentAddress)
 {

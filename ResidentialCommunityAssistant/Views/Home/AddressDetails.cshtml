@@ -10,7 +10,7 @@
             </div>
     @if (this.User.Identity.IsAuthenticated)
     {
-        <a asp-controller="Owner" asp-action="AddAddressToUser" asp-route-Id ="@Model.Id" class="btn btn-primary btn-sm">Станете част от общността на този адрес."</a>       
+        <a asp-controller="Owner" asp-action="AllApartaments" asp-route-givenAddressId="@Model.Id" class="btn btn-primary btn-sm">Станете част от общността на този адрес."</a>
     }
     else
     {

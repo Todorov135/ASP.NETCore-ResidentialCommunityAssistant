@@ -5,8 +5,15 @@
 <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))
     {
+        if (this.User.IsInRole("StoreManager"))
+        {
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="ShopAdministrator" asp-controller="ShopМanagement" asp-action="Index" title="Manage">Администрация на магазин</a>
+            </li>
+        }      
+
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Shop" asp-action="ShoppingCard" title="Manage">()Количка</a>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Shop" asp-action="ShoppingCard" title="Manage">Количка</a>
         </li>
         <li class="nav-item">
             <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name</a>

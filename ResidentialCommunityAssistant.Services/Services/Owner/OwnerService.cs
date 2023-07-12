@@ -130,6 +130,7 @@
                                               {
                                                   Number = a.Number,
                                                   Signature = a.Signature,
+                                                  OwnerId = a.OwnerId,
                                                   Owner = $"{a.Owner.FirstName} {a.Owner.LastName}",
                                                   ApartamentId = a.Id,
                                                   AddressId = a.AddressId

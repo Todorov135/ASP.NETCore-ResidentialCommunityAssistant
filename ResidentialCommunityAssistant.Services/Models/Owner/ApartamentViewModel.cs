@@ -14,6 +14,7 @@
         [Range(ApartamentRangeMinLength, ApartamentRangeMaxLength)]
         public int Number { get; set; }
 
+        public string? OwnerId { get; set; }
         public string? Owner { get; set; }
 
         public int ApartamentId { get; set; }
