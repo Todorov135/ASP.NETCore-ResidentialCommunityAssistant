@@ -4,6 +4,7 @@
     using ResidentialCommunityAssistant.Data;
     using ResidentialCommunityAssistant.Data.Models;
     using ResidentialCommunityAssistant.Services.Contracts.HomeManager;
+    using ResidentialCommunityAssistant.Services.Models.API;
     using ResidentialCommunityAssistant.Services.Models.HomeManager;
     using ResidentialCommunityAssistant.Services.Models.Owner;
     using System.Collections.Generic;
@@ -35,6 +36,19 @@
             await this.data.SaveChangesAsync();
 
             return addressToAdd.Id;
+        }
+
+        public async Task AddApartamentByApiAsync(AddApartamentViewAPIModel apartament)
+        {
+            Apartament apartamentToAdd = new Apartament()
+            {
+                AddressId = apartament.AddressId,
+                Number = apartament.Number,
+                Signature = apartament.Signature
+            };
+
+            await this.data.Apartaments.AddAsync(apartamentToAdd);
+            await this.data.SaveChangesAsync();
         }
 
         /// <summary>

@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+using ResidentialCommunityAssistant.Data;
 using ResidentialCommunityAssistant.Services.Contracts.HomeManager;
 using ResidentialCommunityAssistant.Services.Services.HomeManager;
 
@@ -6,7 +8,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<IHomeManagerService, HomeManagerService>();
+
+string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<CommunityAssistantDBContext>(opt =>
+{
+    opt.UseSqlServer(connectionString);
+});
+
+builder.Services.AddTransient<IHomeManagerService, HomeManagerService>();
 
 builder.Services.AddCors(options =>
 {

@@ -92,7 +92,6 @@
         }
 
         [HttpGet]
-        [Authorize(Roles = "HomeManager")]
         public IActionResult AddAddressSpecifics()
         {
             var apartamentsToAdd = new AllApartamentsToAddViewModel();           
@@ -126,6 +125,7 @@
                 newApartamentToAdd.AddressId = addressId;
                 await this.homeMangerService.AddApartamentAsync(newApartamentToAdd);
             }
+            
 
             apartamentsToAdd.AllAddedApartaments = await this.homeMangerService.GetAllApartamentsInSpecificAddressAsync(addressId);  
 

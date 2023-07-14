@@ -12,6 +12,8 @@
     {
         isThisUserIsPartOfCommunity = true;
     }
+
+
 }
 
 <h2>All Apartamets</h2>
@@ -58,7 +60,11 @@
                     <form class="input-group-sm " asp-controller="HomeManager" asp-action="EditApartament" asp-route-id="@apartament.ApartamentId" method="get">
                         <input type="submit" value="Промяна" class="btn btn-primary mb-2" />
                     </form>
-                    <a class="btn btn-primary" href="@Url.Action("RemoveUserFromAddress", "HomeManager", new { apartamentId = apartament.ApartamentId})">Премахни потребител</a>
+                    if (apartament.OwnerId != null)
+                    {
+                        <a class="btn btn-primary" href="@Url.Action("RemoveUserFromAddress", "HomeManager", new { apartamentId = apartament.ApartamentId})">Премахни потребител</a>
+                        
+                    }
                 }
             }
 
@@ -76,5 +82,7 @@
             <button id="saveButton">Запази</button>
         </div>
     </div>
+    <a asp-controller="Owner" asp-action="AllApartaments" asp-route-givenAddressId="@addressId" class="btn btn-secondary m-2">Опресни списъка</a>
 }
-<script src="~/js/Owner/AddApartament.js"></script>
+<script src="~/js/Owner/AddApartament-v22.js"></script>
+

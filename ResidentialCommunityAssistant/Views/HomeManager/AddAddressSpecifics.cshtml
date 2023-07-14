@@ -1,5 +1,7 @@
 ﻿@model AllApartamentsToAddViewModel
-
+@{
+    int addressId = 0;
+}
 <h2>Address specifics</h2>
 
 <div class="row">
@@ -11,11 +13,15 @@
                     <p>Апартамент: @apartament.Signature</p>
                     <p>Номер: @apartament.Number</p>
                 </div>
-                <form method="post" asp-controller="HomeManager" asp-action="AddAddressSpecifics">
-                    <input type="hidden" asp-route="@apartament.Id"/>
-                    <input type="submit" value="Редактиране"/>
-                </form>
             </div>
+            if (Model.AddressId!=0)
+            {
+                continue;
+            }
+            else
+            {
+                Model.AddressId = apartament.AddressId;
+            }
         }
 
         <form method="post">           
@@ -35,7 +41,7 @@
             </div>
             
             <div class="text-center">
-                <a asp-controller="Owner" asp-action="AllApartaments" class="btn btn-primary mt-3">Приключих с въвеждането</a>
+                <a asp-controller="Owner" asp-action="AllApartaments" asp-route-givenAddressId="@addressId" class="btn btn-primary mt-3">Приключих с въвеждането</a>
             </div>
         </form>
     </div>
