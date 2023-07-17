@@ -47,6 +47,11 @@
         public const int ProductDescriptionMaxLength = 128;
         public const int ProductImgURLMinLength = 8;
         public const int ProductImgURLMaxLength = 2048;
+        public const int ProductQuantityMinRange = 0;
+        public const int ProductQuantityMaxRange = 5000;
+        public const string ProductPriceRangeMinRange = "0.01";
+        public const string ProductPriceRangeMaxRange = "10000.00";
+
 
         //OrderCache
         public const int OrderCacheMinValue = 1;

@@ -1,5 +1,5 @@
-﻿namespace ResidentialCommunityAssistant.Services.Models.Shop
-{    
+﻿namespace ResidentialCommunityAssistant.Services.Models.Shop.ExtendedUser
+{
     public class ProductViewModel
     {
         public int Id { get; set; }
@@ -8,7 +8,7 @@
         public string Description { get; set; } = null!;
 
         public string ImgURL { get; set; } = null!;
-                
+
         public int Quantity { get; set; }
 
         public decimal Price { get; set; }

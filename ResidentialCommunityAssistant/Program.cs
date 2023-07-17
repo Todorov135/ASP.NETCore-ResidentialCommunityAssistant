@@ -16,8 +16,6 @@ var passwordConfigDevEnv = configuration.GetSection("PasswordManagement");
 
 builder.Services.AddDbContext<CommunityAssistantDBContext>(options =>
     options.UseSqlServer(connectionString));
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-
 
 builder.Services.AddIdentity<ExtendedUser, IdentityRole>(options =>
 {
@@ -66,7 +64,7 @@ app.UseSession();
 
 app.MapControllerRoute(
     name: "ShopAdministrator",
-    pattern: "{area:exists}/{controller=ShopÌanagement}/{action=Index}/{id?}");
+    pattern: "{area:exists}/{controller=Shopï¿½anagement}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
     name: "default",

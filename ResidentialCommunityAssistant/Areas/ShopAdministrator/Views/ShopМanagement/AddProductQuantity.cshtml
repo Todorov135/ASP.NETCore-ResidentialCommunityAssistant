@@ -1,0 +1,23 @@
+﻿@model AddQuantityProductViewModel
+<h2>Add product quantity</h2>
+<div class="form-group">
+    <p>Количество към момента: @Model.CurrentProduct.Quantity броя!</p>
+</div>
+
+<form method="post" asp-area="ShopAdministrator" asp-controller="ShopМanagement" asp-action="AddProductQuantity">
+    <input type="hidden" name="productId" value="@Model.CurrentProduct.Id"/>
+    <div class="form-group">
+        <label asp-for="@Model.QuantityToAdd"></label>
+        <input asp-for="@Model.QuantityToAdd" class="form-control" />
+        <span asp-validation-for="@Model.QuantityToAdd" class="small text-danger"></span>
+    </div>
+    <hr />
+    
+    <div class="form-group">
+        <input type="submit" class="btn btn-primary" value="Добави количество" />
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

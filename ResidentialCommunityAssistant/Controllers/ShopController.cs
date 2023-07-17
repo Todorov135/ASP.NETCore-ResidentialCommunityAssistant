@@ -3,7 +3,7 @@
     using Microsoft.AspNetCore.Mvc;
     using ResidentialCommunityAssistant.Extensions;
     using ResidentialCommunityAssistant.Services.Contracts.Shop;
-    using ResidentialCommunityAssistant.Services.Models.Shop;
+    using ResidentialCommunityAssistant.Services.Models.Shop.ExtendedUser;
 
     public class ShopController : BaseController
     {

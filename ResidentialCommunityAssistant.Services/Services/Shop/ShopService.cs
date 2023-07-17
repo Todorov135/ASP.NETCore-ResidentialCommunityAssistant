@@ -4,7 +4,8 @@
     using ResidentialCommunityAssistant.Data;
     using ResidentialCommunityAssistant.Data.Models;
     using ResidentialCommunityAssistant.Services.Contracts.Shop;
-    using ResidentialCommunityAssistant.Services.Models.Shop;
+    using ResidentialCommunityAssistant.Services.Models.Shop.ExtendedUser;
+    using ResidentialCommunityAssistant.Services.Models.Shop.ShopManager;
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -161,6 +162,79 @@
             this.data.SaveChanges();
         }
 
+        public async Task<IEnumerable<ProductOverviewModel>> GetAllProductsForShopManagerAsync()
+        {
+            return await this.data.Products
+                                 .Select(p => new ProductOverviewModel()
+                                 {
+                                     Id = p.Id,
+                                     Name = p.Name,
+                                     ImgURL = p.ImgURL,
+                                     Price = p.Price,
+                                     Quantity = p.Quantity
+                                 })
+                                 .ToListAsync();
+        }
+        public async Task<EditProductViewModel?> GetProductToEditAsync(int productId)
+        {
+            return await this.data.Products
+                                  .Where(p => p.Id == productId)
+                                  .Select(p => new EditProductViewModel()
+                                  {
+                                      Id = p.Id,
+                                      Name = p.Name,
+                                      Description = p.Description,
+                                      ImgURL = p.ImgURL,
+                                      Price = p.Price,
+                                      Quantity = p.Quantity
+                                  })
+                                  .FirstOrDefaultAsync();
+        }
+        public async Task EditProductAsync(EditProductViewModel product)
+        {
+            Product? productToEdit = await this.data.Products.Where(p => p.Id == product.Id).FirstOrDefaultAsync();
+
+            if (productToEdit == null)
+            {
+                return;
+            }
+            productToEdit.Name = product.Name;
+            productToEdit.Description = product.Description;
+            productToEdit.ImgURL = product.ImgURL;
+            productToEdit.Price = product.Price;
+
+            await this.data.SaveChangesAsync();
+        }
+
+        public async Task AddQuantityToProductAsync(AddQuantityProductViewModel product)
+        {
+            Product? productToAddQuantity = await this.data.Products
+                                                      .Where(p => p.Id == product.CurrentProduct.Id)
+                                                      .FirstOrDefaultAsync();
+
+            if (productToAddQuantity == null)
+            {
+                return;
+            }
+            productToAddQuantity.Quantity += product.QuantityToAdd;
+
+            await this.data.SaveChangesAsync();
+        }
+
+        public async Task AddProductAsync(EditProductViewModel product)
+        {
+            Product productToAdd = new Product()
+            {
+                Name = product.Name,
+                Description = product.Description,
+                ImgURL = product.ImgURL,
+                Price = product.Price,
+                Quantity = product.Quantity
+            };
+
+            await this.data.Products.AddAsync(productToAdd);
+            await this.data.SaveChangesAsync();
+        }
         private async Task<OrderCache?> FindOrderCacheAsync(int productId, string userId)
         {
             return await this.data.OrdersCaches
@@ -179,5 +253,7 @@
 
             await this.data.OrdersProducts.AddAsync(op);
         }
+
+        
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace ResidentialCommunityAssistant.Services.Models.Shop
+﻿namespace ResidentialCommunityAssistant.Services.Models.Shop.ExtendedUser
 {
     public class ShoppingCardViewModel
     {
@@ -15,9 +15,9 @@
         {
             get
             {
-                return Math.Round((this.Quantity * this.PricePerQuantity),2);
+                return Math.Round(Quantity * PricePerQuantity, 2);
             }
-        } 
+        }
 
     }
 }

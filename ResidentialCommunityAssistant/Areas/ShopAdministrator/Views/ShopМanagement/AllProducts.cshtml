@@ -1,0 +1,31 @@
+﻿@model ICollection<ProductOverviewModel>
+
+<h2>All products</h2>
+
+<div class="row">
+    <div class="card-group">
+        @foreach (var product in Model)
+        {
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="@product.ImgURL" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">@product.Name</h5>
+                    <p class="card-text">Единична цена: @product.Price лв/бр</p>
+                    @if (product.Quantity<=0)
+                    {
+                        <p class="card-text" style="color:red">Налично количество: @product.Quantity бр.</p>
+                    }
+                    else
+                    {
+                        <p class="card-text">Налично количество: @product.Quantity бр.</p>
+                    }
+
+                </div>
+                <a asp-area="ShopAdministrator" asp-controller="ShopМanagement" asp-action="EditProduct" asp-route-id="@product.Id" class="btn btn-primary mb-1">Редактиране</a>
+                <a asp-area="ShopAdministrator" asp-controller="ShopМanagement" asp-action="AddProductQuantity" asp-route-id="@product.Id" class="btn btn-primary">Добави количество</a>
+            </div>
+            
+           
+        }
+    </div>
+</div>

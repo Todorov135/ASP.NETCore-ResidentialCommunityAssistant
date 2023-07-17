@@ -1,4 +1,4 @@
-﻿namespace ResidentialCommunityAssistant.Services.Models.Shop
+﻿namespace ResidentialCommunityAssistant.Services.Models.Shop.ExtendedUser
 {
     public class OrderHistoryViewModel
     {
