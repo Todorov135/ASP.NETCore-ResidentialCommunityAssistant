@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ResidentialCommunityAssistant.Data;
@@ -29,6 +30,11 @@ builder.Services.AddIdentity<ExtendedUser, IdentityRole>(options =>
 
 builder.Services.AddRazorPages();
 builder.Services.AddControllersWithViews();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Account/Login";
+    });
 
 builder.Services.AddDistributedMemoryCache();
 
@@ -54,7 +60,7 @@ else
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+app.UseCookiePolicy();
 app.UseRouting();
 
 app.UseAuthentication();
@@ -64,7 +70,7 @@ app.UseSession();
 
 app.MapControllerRoute(
     name: "ShopAdministrator",
-    pattern: "{area:exists}/{controller=Shop�anagement}/{action=Index}/{id?}");
+    pattern: "{area:exists}/{controller=ShopAdministrator}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
     name: "default",

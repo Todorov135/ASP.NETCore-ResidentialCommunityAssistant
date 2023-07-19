@@ -13,6 +13,11 @@
         public ExtendedUser HomeManager { get; set; } = null!;
 
         [Required]
+        [ForeignKey(nameof(HomeOwner))]
+        public string HomeOwnerId { get; set; } = null!;
+        public ExtendedUser HomeOwner { get; set; } = null!;
+
+        [Required]
         [ForeignKey(nameof(Apartament))]
         public int ApartamentId { get; set; }
         public Apartament Apartament { get; set; } = null!;

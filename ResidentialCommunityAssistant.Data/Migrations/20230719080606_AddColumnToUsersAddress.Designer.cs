@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ResidentialCommunityAssistant.Data;
 
@@ -11,9 +12,10 @@ using ResidentialCommunityAssistant.Data;
 namespace ResidentialCommunityAssistant.Data.Migrations
 {
     [DbContext(typeof(CommunityAssistantDBContext))]
-    partial class CommunityAssistantDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230719080606_AddColumnToUsersAddress")]
+    partial class AddColumnToUsersAddress
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

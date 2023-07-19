@@ -1,6 +1,5 @@
 ﻿namespace ResidentialCommunityAssistant.Data.Models
-{
-    using Microsoft.AspNetCore.Identity;
+{    
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
@@ -15,6 +14,8 @@
         [ForeignKey(nameof(User))]
         public string UserId { get; set; } = null!;
         public virtual ExtendedUser User { get; set; } = null!;
- 
+
+        public bool IsUserHomeManager { get; set; }
+
     }
 }

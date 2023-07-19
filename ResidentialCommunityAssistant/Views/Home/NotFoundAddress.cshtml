@@ -6,6 +6,9 @@
         <p>Желаете ли да станете домоуправител?</p>
     </div>
     <div>
-    <a asp-controller="HomeManager" asp-action="AddAddress">Да, желая да стана домоуправител</a>
+
+    <form method="get" asp-controller="HomeManager" asp-action="AddAddress">
+        <input type="submit" class="btn btn-primary" value="Да, желая да стана домоуправител" />
+    </form>
     </div>
 

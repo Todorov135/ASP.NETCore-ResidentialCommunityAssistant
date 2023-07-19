@@ -148,6 +148,43 @@
         }
 
         /// <summary>
+        /// Get id of homemanager by address id.
+        /// </summary>
+        /// <param name="addressId"></param>
+        /// <returns>string</returns>
+        public async Task<string> GetHomeManagerIdAsync(int addressId)
+        {
+            var ua = await this.data.UsersAddresses.Where(a => a.AddressId == addressId && a.IsUserHomeManager == true).FirstOrDefaultAsync();
+            if (ua == null)
+            {
+                return string.Empty;
+            }
+            string homemanagerId = ua.UserId;          
+
+            return homemanagerId;
+        }
+
+        /// <summary>
+        /// Set given user to homemanager by addressId.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="addressId"></param>
+        public async Task BecomeHomeManagerAsync(string userId, int addressId)
+        {
+            UserAddress? ua = await this.data.UsersAddresses
+                                             .Where(u => u.UserId == userId && u.AddressId == addressId)
+                                             .FirstOrDefaultAsync();
+            if (ua == null)
+            {
+                return;
+            }
+
+            ua.IsUserHomeManager = true;
+
+            await this.data.SaveChangesAsync();
+        }
+
+        /// <summary>
         /// Search city by name in database and return it`s id. If database don`t have, create and return new onew.
         /// </summary>
         /// <param name="cityName"></param>
@@ -181,5 +218,7 @@
                 return newCity.Id;
             }
         }
+
+       
     }
 }

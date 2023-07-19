@@ -6,6 +6,7 @@
     {
         public EditProductViewModel CurrentProduct { get; set; } = null!;
 
+        [Display(Name = "Добавете количество")]
         [Required]
         [Range(1, ProductQuantityMaxRange)]
         public int QuantityToAdd { get; set; }

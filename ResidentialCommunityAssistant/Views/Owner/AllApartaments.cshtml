@@ -25,7 +25,7 @@
         @if (string.IsNullOrWhiteSpace(apartament.Owner))
         {
             <p>Собственик: Апартаментът няма добавен собственик.</p>
-            <a asp-controller="HomeManager" asp-action="SendRequestToHomeManager" class="btn btn-primary mb-2">Аз съм собственикът!</a>
+            <a asp-controller="HomeManager" asp-action="SendRequestToHomeManager" asp-route-addressId ="@apartament.AddressId" asp-route-apartamentId ="@apartament.ApartamentId" class="btn btn-primary mb-2">Аз съм собственикът!</a>
         }
         else
         {
@@ -33,26 +33,19 @@
             {
                 <p>Собственик: @apartament.Owner</p>
             }
-            
+
         }
         @{
             if (claimsValues != null)
             {
-                var claims = claimsValues.Value.Split(", ");
+                var claims = claimsValues.Value.Split(", ")
+                                               .Select(c => int.Parse(c))
+                                               .Contains(apartament.AddressId);
 
-                for (int i = 0; i < claims.Length; i++)
+                if (claims)
                 {
-                    if (string.IsNullOrWhiteSpace(claims[i]))
-                    {
-                        continue;
-                    }
-                    int parsedClaim = int.Parse(claims[i]);
-                    if (parsedClaim == apartament.AddressId)
-                    {
-                        addressId = apartament.AddressId;
-                        isThisUserIsManagerOfCurrentAddress = true;
-                        break;
-                    }
+                    addressId = apartament.AddressId;
+                    isThisUserIsManagerOfCurrentAddress = true;
                 }
 
                 if (this.User.Identity.IsAuthenticated && isThisUserIsManagerOfCurrentAddress)
@@ -63,7 +56,7 @@
                     if (apartament.OwnerId != null)
                     {
                         <a class="btn btn-primary" href="@Url.Action("RemoveUserFromAddress", "HomeManager", new { apartamentId = apartament.ApartamentId})">Премахни потребител</a>
-                        
+
                     }
                 }
             }
@@ -71,9 +64,9 @@
         }
     </div>
 }
-@if (isThisUserIsManagerOfCurrentAddress)
+@if (isThisUserIsManagerOfCurrentAddress || !Model.Any())
 {
-    <button id="addApartamentBtn" onclick="addApartament()">Добави апартамент</button>
+    <button class="btn btn-primary" id="addApartamentBtn" onclick="addApartament()">Добави апартамент</button>
     <div id="addApartamentContainer" style="display:none">
         <div id="addApartamentSpecifics">
             <input type="text" id="signature" placeholder="Сигнатура на апартамент">

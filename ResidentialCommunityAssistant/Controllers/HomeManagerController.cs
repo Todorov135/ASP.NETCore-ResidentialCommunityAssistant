@@ -34,6 +34,7 @@
             
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> AddAddress()
         {
             var addAddress = new AddAddressViewModel();
@@ -83,15 +84,17 @@
                 {
                     await userManager.AddToRoleAsync(user, "HomeManager");
                 }
-                            
+
+                await this.homeMangerService.BecomeHomeManagerAsync(this.User.Id(), addressId);                 
 
                 return RedirectToAction(nameof(AddAddressSpecifics));
             }
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("ChooseAddress", "Owner");
         }
 
         [HttpGet]
+        [Authorize(Roles = "HomeManager")]
         public IActionResult AddAddressSpecifics()
         {
             var apartamentsToAdd = new AllApartamentsToAddViewModel();           
@@ -162,6 +165,23 @@
 
             return RedirectToAction("AllApartaments", "Owner");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> SendRequestToHomeManager(int addressId, int apartamentId)
+        {
+            var userId = this.User.Id();
+            string homeManagerOfCurrentAddress = await this.homeMangerService.GetHomeManagerIdAsync(addressId);
+
+            if (homeManagerOfCurrentAddress == string.Empty)
+            {
+                return View("Error");
+            }
+
+            await this.homeMangerService.AddUserToApartamentApprovalAsync(homeManagerOfCurrentAddress, userId, apartamentId);
+
+            return View();
+        }
+
         private async Task<ExtendedUser> GetIdentityUser(string userId)
         {
             return await userManager.FindByIdAsync(userId);

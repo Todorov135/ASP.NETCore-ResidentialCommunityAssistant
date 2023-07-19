@@ -13,5 +13,7 @@
         Task<ApartamentViewModel?> GetApartamentByIdAsync(int? id);
         Task EditApartament(ApartamentViewModel apartament);
         void RemoveUserFromAddress(int apartamentId);
+        Task<string> GetHomeManagerIdAsync(int addressId);
+        Task BecomeHomeManagerAsync(string userId, int addressId);
     }
 }
