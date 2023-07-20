@@ -55,7 +55,7 @@
                     </form>
                     if (apartament.OwnerId != null)
                     {
-                        <a class="btn btn-primary" href="@Url.Action("RemoveUserFromAddress", "HomeManager", new { apartamentId = apartament.ApartamentId})">Премахни потребител</a>
+                        <a class="btn btn-danger" href="@Url.Action("RemoveUserFromApartament", "HomeManager", new { apartamentId = apartament.ApartamentId})">Премахни потребител</a>
 
                     }
                 }

@@ -2,9 +2,9 @@
 {
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.DependencyInjection;
     using ResidentialCommunityAssistant.Data.Configuration;
     using ResidentialCommunityAssistant.Data.Models;
+    using System.Reflection.Emit;
 
     public class CommunityAssistantDBContext : IdentityDbContext<ExtendedUser>
     {
@@ -37,7 +37,8 @@
 
             builder.Entity<OrderProduct>()
                    .HasKey(op => new { op.OrderId, op.ProductId });
-            
+
+
             builder.ApplyConfiguration(new AddressConfiguration());
             builder.ApplyConfiguration(new ApartamentConfiguration());
             builder.ApplyConfiguration(new CityConfiguration());

@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var isUserHomemanager = this.User.IsInRole("HomeManager");
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -27,6 +30,12 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Shop" asp-action="AllProducts">Магазин</a>
                             </li>
+                            if (isUserHomemanager)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="HomeManager" asp-action="ListToApprove">Списък</a>
+                                </li>
+                            }
                         }
                         
                     </ul>

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ResidentialCommunityAssistant.Data;
 
@@ -11,9 +12,10 @@ using ResidentialCommunityAssistant.Data;
 namespace ResidentialCommunityAssistant.Data.Migrations
 {
     [DbContext(typeof(CommunityAssistantDBContext))]
-    partial class CommunityAssistantDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230720091045_AddForeignKeyToHomeOwnerToHomeManagersApprovals")]
+    partial class AddForeignKeyToHomeOwnerToHomeManagersApprovals
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,14 +54,14 @@ namespace ResidentialCommunityAssistant.Data.Migrations
                         new
                         {
                             Id = "492c2f53-e30a-4da9-b639-e599ef6d7794",
-                            ConcurrencyStamp = "620d549e-1169-4bad-bbc4-fcb1374e7f65",
+                            ConcurrencyStamp = "6fea8b42-b8b9-46d6-a244-43e21df83c86",
                             Name = "HomeManager",
                             NormalizedName = "HOMEMANAGER"
                         },
                         new
                         {
                             Id = "df52a94f-e70f-4872-a5a8-48631411afdb",
-                            ConcurrencyStamp = "85c4e6f9-a86d-420e-bfb1-94f1b1a03e70",
+                            ConcurrencyStamp = "acf9e114-f674-4363-a82b-4802385301fc",
                             Name = "StoreManager",
                             NormalizedName = "STOREMANAGER"
                         });
@@ -460,7 +462,7 @@ namespace ResidentialCommunityAssistant.Data.Migrations
                         {
                             Id = "8815d5cc-c403-43e8-b2d3-40f57a8d1d61",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c1799263-ae4e-4d79-8d93-dc923c97bb02",
+                            ConcurrencyStamp = "5ab6adcd-56fe-4aa2-9272-f3926f091352",
                             Email = "homeManager@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Тодор",
@@ -468,9 +470,9 @@ namespace ResidentialCommunityAssistant.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "HOMEMANAGER@MAIL.COM",
                             NormalizedUserName = "HOMEMANAGER@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHb1AS+iSpe3fy+RDBXgGmhQHIFIpVuUUFGipckusC0hd9BQ3UhX1uw2loUJ7D2juw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELYGwSwMrQZu3EGbsl16HvENh1JXHbRyZKE+182+W+tD1ylNP2U5KCH/iNyf403XhA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d4454aa1-fcad-489b-87cc-d480cd3549b6",
+                            SecurityStamp = "12f99614-a749-4d75-abd3-a83e67eb6078",
                             TwoFactorEnabled = false,
                             UserName = "homeManager@mail.com"
                         },
@@ -478,7 +480,7 @@ namespace ResidentialCommunityAssistant.Data.Migrations
                         {
                             Id = "579b52e0-38e4-4f41-a30f-31e72767c536",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "49204d9f-d280-4da3-bb49-0d6f61ff4245",
+                            ConcurrencyStamp = "dbacb3dd-2225-4c79-86b5-1edae51c4d17",
                             Email = "firstOwner@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Иван",
@@ -486,9 +488,9 @@ namespace ResidentialCommunityAssistant.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "FIRSTOWNER@MAIL.COM",
                             NormalizedUserName = "FIRSTOWNER@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEH3uISK72x3PfvvJh4j8YpGDIi3LoY/KAYc6E3L6O0fK0CfXoypgrlfSdIwF+wMHAA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHEMecWzts2+xRtsfGA+VcZVzHlCFKDd/ZiS3wn79611xYsx7eNY5EusFhrDUjKidA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "72207651-fe6c-40de-b569-396cf66f297c",
+                            SecurityStamp = "23e08ba4-5157-48b0-bc5e-6ca3f131da6b",
                             TwoFactorEnabled = false,
                             UserName = "firstOwner@mail.com"
                         },
@@ -496,7 +498,7 @@ namespace ResidentialCommunityAssistant.Data.Migrations
                         {
                             Id = "88d33982-06d8-43f0-b809-7d6ed7f3ab23",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2ce7521c-8c5b-4d93-93f7-e260a08585e4",
+                            ConcurrencyStamp = "6872d834-ce41-4f6f-8dae-38ed8fc1205d",
                             Email = "secondOwner@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Петър",
@@ -504,9 +506,9 @@ namespace ResidentialCommunityAssistant.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "SECONDOWNER@MAIL.COM",
                             NormalizedUserName = "SECONDOWNER@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEH4mtbOgpWRS77Y7bBoYQR+onxtPb4/AaAGbVzqWtiUA508rugrQ3L8sibZpomodfw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEN6b/niX1AR746mST0lH0IuDXqzDbMWlIWu1Usb0pRbDaZYT40RnNgHCLbPDLji07A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9adde18d-9b07-49e6-8527-3beeda142b25",
+                            SecurityStamp = "be24abce-aafb-400e-8f6b-f64fc753b347",
                             TwoFactorEnabled = false,
                             UserName = "secondOwner@mail.com"
                         });
@@ -524,10 +526,15 @@ namespace ResidentialCommunityAssistant.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("HomeManagerId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("HomeOwnerId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("IsApproved")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -885,7 +892,9 @@ namespace ResidentialCommunityAssistant.Data.Migrations
 
                     b.HasOne("ResidentialCommunityAssistant.Data.Models.ExtendedUser", "HomeOwner")
                         .WithMany()
-                        .HasForeignKey("HomeOwnerId");
+                        .HasForeignKey("HomeOwnerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Apartament");
 

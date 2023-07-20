@@ -12,8 +12,8 @@ using ResidentialCommunityAssistant.Data;
 namespace ResidentialCommunityAssistant.Data.Migrations
 {
     [DbContext(typeof(CommunityAssistantDBContext))]
-    [Migration("20230719080606_AddColumnToUsersAddress")]
-    partial class AddColumnToUsersAddress
+    [Migration("20230720124817_RemoveConstraintFromHomeManagerApproval")]
+    partial class RemoveConstraintFromHomeManagerApproval
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -54,14 +54,14 @@ namespace ResidentialCommunityAssistant.Data.Migrations
                         new
                         {
                             Id = "492c2f53-e30a-4da9-b639-e599ef6d7794",
-                            ConcurrencyStamp = "85d21beb-403e-487c-ac01-d08209de7b69",
+                            ConcurrencyStamp = "530e4e3a-de94-4377-8dc4-99c7869a8201",
                             Name = "HomeManager",
                             NormalizedName = "HOMEMANAGER"
                         },
                         new
                         {
                             Id = "df52a94f-e70f-4872-a5a8-48631411afdb",
-                            ConcurrencyStamp = "e4025971-7bb2-4242-bdba-225be113c858",
+                            ConcurrencyStamp = "7ca600e7-ad6b-4495-a0d0-27a1264203eb",
                             Name = "StoreManager",
                             NormalizedName = "STOREMANAGER"
                         });
@@ -462,7 +462,7 @@ namespace ResidentialCommunityAssistant.Data.Migrations
                         {
                             Id = "8815d5cc-c403-43e8-b2d3-40f57a8d1d61",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5d344717-beb0-4ff3-8d53-e6fee8200d8e",
+                            ConcurrencyStamp = "adeebfda-b4f0-43ab-a723-ed439a33e7d7",
                             Email = "homeManager@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Тодор",
@@ -470,9 +470,9 @@ namespace ResidentialCommunityAssistant.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "HOMEMANAGER@MAIL.COM",
                             NormalizedUserName = "HOMEMANAGER@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEI/EvplGqnH06VdVP+kf7VH6vejv5MYWqYJXJevshpub14JstCEIFergR/puDmiUug==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDmUJsh6EjXdT4E5hpUEYiO9waL7/QQIPjMWCBGeMHz8dJbeTrsmIuaefAlv/4ZWWQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "a90ab7e1-a507-4746-81f0-803f2c3227f6",
+                            SecurityStamp = "c8509fad-0c30-4d28-b3ef-c19f772f5850",
                             TwoFactorEnabled = false,
                             UserName = "homeManager@mail.com"
                         },
@@ -480,7 +480,7 @@ namespace ResidentialCommunityAssistant.Data.Migrations
                         {
                             Id = "579b52e0-38e4-4f41-a30f-31e72767c536",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d6db305c-4b22-42ab-9af5-4d08bb592147",
+                            ConcurrencyStamp = "9f8410ba-6aad-46e2-81ee-4eacf385e87c",
                             Email = "firstOwner@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Иван",
@@ -488,9 +488,9 @@ namespace ResidentialCommunityAssistant.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "FIRSTOWNER@MAIL.COM",
                             NormalizedUserName = "FIRSTOWNER@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMmr3Tgi3+J8/Eb2ANu2QsX9gkngpq/l9nI+BC7BPmmw4JYsoBll3kGtMvNWQ2+bPA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEO7aN2++OzYozWg0Kr/ZVcCfsbnjEjq7fzDu972xNWED8tJ8YB7TplwcrLeS95DpCw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f3b9ca5f-1e6f-412e-a691-d1bb40459296",
+                            SecurityStamp = "7ead310b-1c4e-492c-9746-9dea124ed143",
                             TwoFactorEnabled = false,
                             UserName = "firstOwner@mail.com"
                         },
@@ -498,7 +498,7 @@ namespace ResidentialCommunityAssistant.Data.Migrations
                         {
                             Id = "88d33982-06d8-43f0-b809-7d6ed7f3ab23",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d1b78453-9a6c-42cc-99f7-113417155f23",
+                            ConcurrencyStamp = "d8a92683-6ee3-4354-ac55-ce47b3bea2b9",
                             Email = "secondOwner@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Петър",
@@ -506,9 +506,9 @@ namespace ResidentialCommunityAssistant.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "SECONDOWNER@MAIL.COM",
                             NormalizedUserName = "SECONDOWNER@MAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBshc435HVTfp49ZVX77J3lCQSTJcd3G5xhikzYqPn4gENYyEeNq9O8c888fC5rY/A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFFgZWBfglmb/yB7aXIAWsX70oAIX9XaGDPLW3NDafCY8tI4XzGAL8FpIa8p9Gi3vw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9213dbf8-12cf-47b1-867c-e77ce0205044",
+                            SecurityStamp = "7dd0ba58-ddbd-4b1d-b3ab-b6f50e61be37",
                             TwoFactorEnabled = false,
                             UserName = "secondOwner@mail.com"
                         });
@@ -527,6 +527,9 @@ namespace ResidentialCommunityAssistant.Data.Migrations
 
                     b.Property<string>("HomeManagerId")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HomeOwnerId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("IsApproved")
@@ -536,7 +539,7 @@ namespace ResidentialCommunityAssistant.Data.Migrations
 
                     b.HasIndex("ApartamentId");
 
-                    b.HasIndex("HomeManagerId");
+                    b.HasIndex("HomeOwnerId");
 
                     b.ToTable("HomeManagersApprovals");
                 });
@@ -886,15 +889,13 @@ namespace ResidentialCommunityAssistant.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ResidentialCommunityAssistant.Data.Models.ExtendedUser", "HomeManager")
+                    b.HasOne("ResidentialCommunityAssistant.Data.Models.ExtendedUser", "HomeOwner")
                         .WithMany()
-                        .HasForeignKey("HomeManagerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("HomeOwnerId");
 
                     b.Navigation("Apartament");
 
-                    b.Navigation("HomeManager");
+                    b.Navigation("HomeOwner");
                 });
 
             modelBuilder.Entity("ResidentialCommunityAssistant.Data.Models.Order", b =>

@@ -5,23 +5,17 @@
 
     public class HomeManagerApproval
     {
+        [Key]
         public int Id { get; set; }
+        public string? HomeManagerId { get; set; }
 
-        [Required]
-        [ForeignKey(nameof(HomeManager))]
-        public string HomeManagerId { get; set; } = null!;
-        public ExtendedUser HomeManager { get; set; } = null!;
-
-        [Required]
         [ForeignKey(nameof(HomeOwner))]
-        public string HomeOwnerId { get; set; } = null!;
-        public ExtendedUser HomeOwner { get; set; } = null!;
+        public string? HomeOwnerId { get; set; } 
+        public ExtendedUser? HomeOwner { get; set; } 
 
-        [Required]
+        
         [ForeignKey(nameof(Apartament))]
         public int ApartamentId { get; set; }
         public Apartament Apartament { get; set; } = null!;
-
-        public bool IsApproved { get; set; }
     }
 }

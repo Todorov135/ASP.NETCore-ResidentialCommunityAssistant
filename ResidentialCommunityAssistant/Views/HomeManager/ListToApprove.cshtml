@@ -1,0 +1,23 @@
+﻿@model IEnumerable<ApproveUserViewModel>
+
+<h2>List to approve</h2>
+
+@foreach (var request in Model)
+{
+    <div class="border border-dark mb-2 p-2">
+        <p><b>Запитване от: </b>@request.UserName</p>
+        <p><b>За имот: </b>@request.ApartamentSignature</p>
+        <p><b>Намиращ се в: </b>@request.AddressName</p>
+
+        <div class="row">
+            <form asp-controller="HomeManager" asp-action="ApproveUser"
+                  asp-route-apartamentId="@request.ApartamentId" asp-route-addressId="@request.AddressId" asp-route-userId="@request.UserId" class="w-75">
+                <input type="submit" class="btn btn-primary" value="Одобри"/>
+            </form>
+            <form asp-controller="HomeManager" asp-action="RejectUser"
+                  asp-route-apartamentId="@request.ApartamentId" asp-route-userId="@request.UserId"  class="w-auto">
+                <input type="submit" class="btn btn-danger" value="Отхвърли" />
+            </form>
+        </div>
+    </div>
+}

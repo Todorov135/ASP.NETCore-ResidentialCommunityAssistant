@@ -12,8 +12,13 @@
         Task<ICollection<AddApartamentViewModel>> GetAllApartamentsInSpecificAddressAsync(int addressId);
         Task<ApartamentViewModel?> GetApartamentByIdAsync(int? id);
         Task EditApartament(ApartamentViewModel apartament);
-        void RemoveUserFromAddress(int apartamentId);
+        void RemoveUserFromApartament(int apartamentId);
         Task<string> GetHomeManagerIdAsync(int addressId);
         Task BecomeHomeManagerAsync(string userId, int addressId);
+        Task AddUserToApartamentApprovalAsync(string homemanagerId, string userId, int apartamentId);
+        Task<IEnumerable<ApproveUserViewModel>> GetListOfUserToApproveToAddressAsync(string userId);
+        Task AddHomeOwnerToApartamentAsync(int apartamentId, int addressId, string userId);
+        Task<bool> IsThisRequestFromUserExist(string homeManagerOfCurrentAddress, string userId, int apartamentId);
+        Task RejectRequestFromUser(int apartamentId, string userId);
     }
 }

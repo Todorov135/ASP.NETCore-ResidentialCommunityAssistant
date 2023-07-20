@@ -22,7 +22,7 @@
         /// <returns>AddressViewModel if finds criteria or null if not.</returns>
         public async Task<AddressViewModel?> GetAddressAsync(string cityName, string addressName, string number)
         {
-            return await this.data.Addresses
+            AddressViewModel? av = await this.data.Addresses
                                   .Where(a => a.City.Name.ToLower() == cityName.ToLower() && a.Name.ToLower() == addressName.ToLower() && a.Number == number.ToLower())
                                   .Select(a => new AddressViewModel()
                                   {
@@ -32,6 +32,11 @@
                                       Number = a.Number
                                   })
                                   .FirstOrDefaultAsync();
+            if (av == null)
+            {
+                return null;
+            }
+            return av;
         }
 
         public async Task<AddressViewModel?> GetAddressByIdAsync(int addressId)

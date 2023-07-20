@@ -379,7 +379,8 @@ namespace ResidentialCommunityAssistant.Data.Migrations
                 columns: table => new
                 {
                     AddressId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    IsUserHomeManager = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -404,7 +405,8 @@ namespace ResidentialCommunityAssistant.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    HomeManagerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    HomeManagerId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    HomeOwnerId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ApartamentId = table.Column<int>(type: "int", nullable: false),
                     IsApproved = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -417,12 +419,6 @@ namespace ResidentialCommunityAssistant.Data.Migrations
                         principalTable: "Apartaments",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_HomeManagersApprovals_AspNetUsers_HomeManagerId",
-                        column: x => x.HomeManagerId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
@@ -430,8 +426,8 @@ namespace ResidentialCommunityAssistant.Data.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "492c2f53-e30a-4da9-b639-e599ef6d7794", "13547841-235d-4aa2-a830-20c2f51cc258", "HomeManager", "HOMEMANAGER" },
-                    { "df52a94f-e70f-4872-a5a8-48631411afdb", "d7b1cdac-74bb-4893-80ec-e464c1a90263", "StoreManager", "STOREMANAGER" }
+                    { "492c2f53-e30a-4da9-b639-e599ef6d7794", "040e885f-b26a-4f7b-b3ac-e927e62e5b2d", "HomeManager", "HOMEMANAGER" },
+                    { "df52a94f-e70f-4872-a5a8-48631411afdb", "a674794d-c3d4-426d-94b8-88a92960247a", "StoreManager", "STOREMANAGER" }
                 });
 
             migrationBuilder.InsertData(
@@ -439,9 +435,9 @@ namespace ResidentialCommunityAssistant.Data.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "579b52e0-38e4-4f41-a30f-31e72767c536", 0, "a4755adb-d7c6-45d9-a4f5-18f032a2e59a", "firstOwner@mail.com", false, "Иван", "Иванов", false, null, "FIRSTOWNER@MAIL.COM", "FIRSTOWNER@MAIL.COM", "AQAAAAEAACcQAAAAELE1g1PCXZR9RXYQj+a3dCJ+kH3MnOvYbInGK5YlMaoYvK8dQ7iJPSyCHhRAbyeISQ==", null, false, "0d9769e1-98b9-4aee-b878-a5ab6e3a4690", false, "firstOwner@mail.com" },
-                    { "8815d5cc-c403-43e8-b2d3-40f57a8d1d61", 0, "1903f883-2f51-4e83-adbf-93af77277988", "homeManager@mail.com", false, "Тодор", "Тодоров", false, null, "HOMEMANAGER@MAIL.COM", "HOMEMANAGER@MAIL.COM", "AQAAAAEAACcQAAAAECOyNGHXIUIvLjw5o4irYQjvR0LJcVB5jrz4IFp42/6cbRZ00mUAYeUFS1nVbHKfYg==", null, false, "f4f0d126-a3d4-4a40-99f7-560ebde08d41", false, "homeManager@mail.com" },
-                    { "88d33982-06d8-43f0-b809-7d6ed7f3ab23", 0, "bc25a082-69ef-407b-9647-c902c78b6bf8", "secondOwner@mail.com", false, "Петър", "Петров", false, null, "SECONDOWNER@MAIL.COM", "SECONDOWNER@MAIL.COM", "AQAAAAEAACcQAAAAEHihJMjUgr6Dinr3E5hswRquaRJ37uVsWHoQI7071b16j9SepSa56wqOvw4LrlUaqQ==", null, false, "376089ed-bed5-4f59-9461-da0ded318b6e", false, "secondOwner@mail.com" }
+                    { "579b52e0-38e4-4f41-a30f-31e72767c536", 0, "e3f1ecd2-20c7-483f-a2d9-e634ceabf125", "firstOwner@mail.com", false, "Иван", "Иванов", false, null, "FIRSTOWNER@MAIL.COM", "FIRSTOWNER@MAIL.COM", "AQAAAAEAACcQAAAAEC0W0eTWSp+TGfmF5MU4dsUmL8SQ/pf+rvcoU34P58uYghcuBlXr9KPJL7UGR1AiOg==", null, false, "e019ee2a-75c5-46f0-bb18-a541b3e0a66a", false, "firstOwner@mail.com" },
+                    { "8815d5cc-c403-43e8-b2d3-40f57a8d1d61", 0, "a0cb6615-0842-4ef8-ad15-a14237b75d8d", "homeManager@mail.com", false, "Тодор", "Тодоров", false, null, "HOMEMANAGER@MAIL.COM", "HOMEMANAGER@MAIL.COM", "AQAAAAEAACcQAAAAENeD2BZ6Jm2+b6glL96xpbXG9fSoP1vdoH+sKuhdyyvmMBTgPftBwNj+yKlhKINStw==", null, false, "f7598960-82cd-41f3-833e-543a59f66425", false, "homeManager@mail.com" },
+                    { "88d33982-06d8-43f0-b809-7d6ed7f3ab23", 0, "00cb886a-4d96-451c-aa06-837722ec34bc", "secondOwner@mail.com", false, "Петър", "Петров", false, null, "SECONDOWNER@MAIL.COM", "SECONDOWNER@MAIL.COM", "AQAAAAEAACcQAAAAEKboYJrW5eyr3yk80NfiPpU1eWfn2aH6w700Vnjbjgt5q/Lv1jsvAaFyj22Z0ekLiA==", null, false, "e4601680-79b6-464c-959e-9cae1cffec60", false, "secondOwner@mail.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -475,17 +471,20 @@ namespace ResidentialCommunityAssistant.Data.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
                 columns: new[] { "RoleId", "UserId" },
-                values: new object[] { "492c2f53-e30a-4da9-b639-e599ef6d7794", "8815d5cc-c403-43e8-b2d3-40f57a8d1d61" });
+                values: new object[,]
+                {
+                    { "492c2f53-e30a-4da9-b639-e599ef6d7794", "8815d5cc-c403-43e8-b2d3-40f57a8d1d61" },
+                    { "df52a94f-e70f-4872-a5a8-48631411afdb", "8815d5cc-c403-43e8-b2d3-40f57a8d1d61" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Cities",
                 columns: new[] { "Id", "LocalityTypeId", "Name", "PostCode" },
-                values: new object[] { 1, 1, "Пловдив", "4000" });
-
-            migrationBuilder.InsertData(
-                table: "Cities",
-                columns: new[] { "Id", "LocalityTypeId", "Name", "PostCode" },
-                values: new object[] { 2, 1, "София", "1000" });
+                values: new object[,]
+                {
+                    { 1, 1, "Пловдив", "4000" },
+                    { 2, 1, "София", "1000" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Addresses",
@@ -514,12 +513,12 @@ namespace ResidentialCommunityAssistant.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "UsersAddresses",
-                columns: new[] { "AddressId", "UserId" },
+                columns: new[] { "AddressId", "UserId", "IsUserHomeManager" },
                 values: new object[,]
                 {
-                    { 2, "579b52e0-38e4-4f41-a30f-31e72767c536" },
-                    { 2, "8815d5cc-c403-43e8-b2d3-40f57a8d1d61" },
-                    { 2, "88d33982-06d8-43f0-b809-7d6ed7f3ab23" }
+                    { 2, "579b52e0-38e4-4f41-a30f-31e72767c536", false },
+                    { 2, "8815d5cc-c403-43e8-b2d3-40f57a8d1d61", false },
+                    { 2, "88d33982-06d8-43f0-b809-7d6ed7f3ab23", false }
                 });
 
             migrationBuilder.CreateIndex(
@@ -600,11 +599,6 @@ namespace ResidentialCommunityAssistant.Data.Migrations
                 name: "IX_HomeManagersApprovals_ApartamentId",
                 table: "HomeManagersApprovals",
                 column: "ApartamentId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_HomeManagersApprovals_HomeManagerId",
-                table: "HomeManagersApprovals",
-                column: "HomeManagerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_UserId",

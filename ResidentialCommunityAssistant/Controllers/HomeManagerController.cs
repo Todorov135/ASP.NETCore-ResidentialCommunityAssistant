@@ -3,8 +3,12 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.ModelBinding;
+    using Microsoft.AspNetCore.Routing;
+    using Microsoft.EntityFrameworkCore.Metadata.Internal;
     using ResidentialCommunityAssistant.Data.Models;
     using ResidentialCommunityAssistant.Extensions;
+    using ResidentialCommunityAssistant.Services.Contracts.Home;
     using ResidentialCommunityAssistant.Services.Contracts.HomeManager;
     using ResidentialCommunityAssistant.Services.Contracts.Owner;
     using ResidentialCommunityAssistant.Services.Models.HomeManager;
@@ -19,17 +23,20 @@
         private readonly UserManager<ExtendedUser> userManager;
         private readonly IOwnerService ownerService;
         private readonly IHomeManagerService homeMangerService;
+        private readonly IHomeService homeService;
 
         public HomeManagerController(
             RoleManager<IdentityRole> roleManager,
             UserManager<ExtendedUser> userManager,
             IHomeManagerService homeMangerService,
-            IOwnerService ownerService)
+            IOwnerService ownerService,
+            IHomeService homeService)
         {
             this.roleManager = roleManager;
             this.userManager = userManager;
             this.homeMangerService = homeMangerService;
             this.ownerService = ownerService;
+            this.homeService = homeService;
         }
             
 
@@ -46,12 +53,11 @@
 
         [HttpPost]
         public async Task<IActionResult> AddAddress(AddAddressViewModel model)
-        {
+        {           
             if (!ModelState.IsValid)
             {
                 model.LocalityTypeViews = await this.ownerService.GetAllLocalityTypesAsync();
                 model.LocationTypeViews = await this.ownerService.GetAllLocationTypesAsync();
-
                 return View(model);
             }
 
@@ -61,6 +67,12 @@
             {
                int addressId = await homeMangerService.AddAddressAsync(model);
 
+                if (addressId == 0)
+                {
+                    model.LocalityTypeViews = await this.ownerService.GetAllLocalityTypesAsync();
+                    model.LocationTypeViews = await this.ownerService.GetAllLocationTypesAsync();
+                    return View(model);
+                }
                 string claimName = constClaimName;
                 string claimValue = addressId.ToString();
 
@@ -87,6 +99,7 @@
 
                 await this.homeMangerService.BecomeHomeManagerAsync(this.User.Id(), addressId);                 
 
+                
                 return RedirectToAction(nameof(AddAddressSpecifics));
             }
 
@@ -94,7 +107,6 @@
         }
 
         [HttpGet]
-        [Authorize(Roles = "HomeManager")]
         public IActionResult AddAddressSpecifics()
         {
             var apartamentsToAdd = new AllApartamentsToAddViewModel();           
@@ -159,9 +171,9 @@
 
         [HttpGet]
         [Authorize(Roles = "HomeManager")]
-        public IActionResult RemoveUserFromAddress(int apartamentId)
+        public IActionResult RemoveUserFromApartament(int apartamentId)
         {
-            this.homeMangerService.RemoveUserFromAddress(apartamentId);
+            this.homeMangerService.RemoveUserFromApartament(apartamentId);
 
             return RedirectToAction("AllApartaments", "Owner");
         }
@@ -177,17 +189,57 @@
                 return View("Error");
             }
 
+            var isRequestDuplicated = await this.homeMangerService.IsThisRequestFromUserExist(homeManagerOfCurrentAddress, userId, apartamentId);
+
+            if (isRequestDuplicated)
+            {
+                return RedirectToAction("AllApartaments", "Owner", new { givenAddressId = addressId });
+            }
+
             await this.homeMangerService.AddUserToApartamentApprovalAsync(homeManagerOfCurrentAddress, userId, apartamentId);
 
             return View();
         }
 
+        [HttpGet]
+        [Authorize(Roles = "HomeManager")]
+        public async Task<IActionResult> ListToApprove()
+        {
+            var userId = this.User.Id();
+
+            var listToApprove = await this.homeMangerService.GetListOfUserToApproveToAddressAsync(userId);
+
+            return View(listToApprove);
+        }
+        public async Task<IActionResult> ApproveUser(int apartamentId, int addressId, string userId)
+        {
+            if (apartamentId == 0
+                || string.IsNullOrEmpty(userId)
+                || addressId == 0)
+            {
+                return RedirectToAction(nameof(ListToApprove));
+            }
+
+            await this.homeMangerService.AddHomeOwnerToApartamentAsync(apartamentId, addressId, userId);
+
+            return RedirectToAction(nameof(ListToApprove));
+        }
+        public async Task<IActionResult> RejectUser(int apartamentId, string userId)
+        {
+            if (apartamentId == 0
+                && string.IsNullOrEmpty(userId))
+            {
+                return RedirectToAction(nameof(ListToApprove));
+            }
+
+           await this.homeMangerService.RejectRequestFromUser(apartamentId, userId);
+
+            return RedirectToAction(nameof(ListToApprove));
+        }
         private async Task<ExtendedUser> GetIdentityUser(string userId)
         {
             return await userManager.FindByIdAsync(userId);
         }
 
-
-        
     }
 }

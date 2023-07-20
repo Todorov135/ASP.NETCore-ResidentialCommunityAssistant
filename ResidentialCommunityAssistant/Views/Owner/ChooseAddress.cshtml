@@ -1,25 +1,36 @@
 ﻿@model SelectedOwnedAddressViewModel
 
+@{
+    var isCollectionEmpty = Model.OwnedAddresses.Any();
+}
+
 <div class="row">
     <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
-        <div>Моля, изберете адрес:</div>
-        <form method="post">
-            
-            <div class="form-group">
-                <select asp-for="SelectedAddressId" class="form-control">
-                   
-                    @foreach (var address in Model.OwnedAddresses)
-                    {
-                        <option value="@address.Id">@address.AddressFullName</option>
-                    }
-                </select>
-                
-            </div>
+        @if (isCollectionEmpty)
+        {
+            <div>Моля, изберете адрес:</div>
+            <form method="post">
 
-            <div class="text-center">
-                <input class="btn btn-primary mt-3" type="submit" value="Избери" />
-            </div>
-        </form>
+                <div class="form-group">
+                    <select asp-for="SelectedAddressId" class="form-control">
+
+                        @foreach (var address in Model.OwnedAddresses)
+                        {
+                            <option value="@address.Id">@address.AddressFullName</option>
+                        }
+                    </select>
+
+                </div>
+
+                <div class="text-center">
+                    <input class="btn btn-primary mt-3" type="submit" value="Избери" />
+                </div>
+            </form>
+        }
+        else
+        {
+            <p>Моля, изчакайте одобрение от домоуправителя на Вашият адрес.</p>
+        }
     </div>
     <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">        
         <a asp-controller="Home" asp-action="AddressSearch" class="btn btn-primary">Търсене на адрес</a>
