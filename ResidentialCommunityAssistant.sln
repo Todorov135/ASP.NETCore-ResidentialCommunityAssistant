@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ResidentialCommunityAssista
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ResidentialCommunityAssistant.Services", "ResidentialCommunityAssistant.Services\ResidentialCommunityAssistant.Services.csproj", "{6B3ECDDA-10C8-4A6A-9576-4940440E235D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResidentialCommunityAssistant.API", "ResidentialCommunityAssistant.API\ResidentialCommunityAssistant.API.csproj", "{201BE1D0-A36F-4373-B1B2-4102A59C2008}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ResidentialCommunityAssistant.API", "ResidentialCommunityAssistant.API\ResidentialCommunityAssistant.API.csproj", "{201BE1D0-A36F-4373-B1B2-4102A59C2008}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResidentialCommunityAssistant.Tests", "ResidentialCommunityAssistant.Tests\ResidentialCommunityAssistant.Tests.csproj", "{052D3B95-6161-4BCB-AF82-961C0D1E74C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{201BE1D0-A36F-4373-B1B2-4102A59C2008}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{201BE1D0-A36F-4373-B1B2-4102A59C2008}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{201BE1D0-A36F-4373-B1B2-4102A59C2008}.Release|Any CPU.Build.0 = Release|Any CPU
+		{052D3B95-6161-4BCB-AF82-961C0D1E74C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{052D3B95-6161-4BCB-AF82-961C0D1E74C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{052D3B95-6161-4BCB-AF82-961C0D1E74C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{052D3B95-6161-4BCB-AF82-961C0D1E74C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

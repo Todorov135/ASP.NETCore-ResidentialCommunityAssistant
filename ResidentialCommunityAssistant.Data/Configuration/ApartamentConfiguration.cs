@@ -5,7 +5,7 @@
     using ResidentialCommunityAssistant.Data.Models;
     using System;
 
-    internal class ApartamentConfiguration : IEntityTypeConfiguration<Apartament>
+    public class ApartamentConfiguration : IEntityTypeConfiguration<Apartament>
     {
         public void Configure(EntityTypeBuilder<Apartament> builder)
         {

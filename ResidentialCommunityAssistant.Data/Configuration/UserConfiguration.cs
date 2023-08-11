@@ -5,7 +5,7 @@
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
     using ResidentialCommunityAssistant.Data.Models;
 
-    internal class UserConfiguration : IEntityTypeConfiguration<ExtendedUser>
+    public class UserConfiguration : IEntityTypeConfiguration<ExtendedUser>
     {
         public void Configure(EntityTypeBuilder<ExtendedUser> builder)
         {
@@ -30,6 +30,7 @@
                 Email = "homeManager@mail.com",
                 NormalizedEmail = "homeManager@mail.com".ToUpper()                
             };
+            
             homeManager.PasswordHash = hasher.HashPassword(homeManager, "homemanager");
             users.Add(homeManager);
 

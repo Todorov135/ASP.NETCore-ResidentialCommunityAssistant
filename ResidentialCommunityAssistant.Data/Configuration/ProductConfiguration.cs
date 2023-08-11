@@ -5,7 +5,7 @@
     using ResidentialCommunityAssistant.Data.Models;
     using System;
 
-    internal class ProductConfiguration : IEntityTypeConfiguration<Product>
+    public class ProductConfiguration : IEntityTypeConfiguration<Product>
     {
         public void Configure(EntityTypeBuilder<Product> builder)
         {

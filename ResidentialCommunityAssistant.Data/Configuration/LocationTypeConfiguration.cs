@@ -4,7 +4,7 @@
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
     using ResidentialCommunityAssistant.Data.Models;
 
-    internal class LocationTypeConfiguration : IEntityTypeConfiguration<LocationType>
+    public class LocationTypeConfiguration : IEntityTypeConfiguration<LocationType>
     {
         public void Configure(EntityTypeBuilder<LocationType> builder)
         {

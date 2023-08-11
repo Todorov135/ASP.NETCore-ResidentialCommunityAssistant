@@ -4,7 +4,7 @@
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
     using ResidentialCommunityAssistant.Data.Models;
 
-    internal class CommunityTopicConfiguration : IEntityTypeConfiguration<CommunityTopic>
+    public class CommunityTopicConfiguration : IEntityTypeConfiguration<CommunityTopic>
     {
         public void Configure(EntityTypeBuilder<CommunityTopic> builder)
         {
