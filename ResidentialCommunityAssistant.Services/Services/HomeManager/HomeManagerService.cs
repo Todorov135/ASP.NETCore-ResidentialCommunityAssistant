@@ -255,12 +255,17 @@
             }
 
             apartament.OwnerId = userId;
-            UserAddress ua = new UserAddress()
+            UserAddress existingUa = await this.data.UsersAddresses.FirstOrDefaultAsync(ua => ua.UserId == userId && ua.AddressId == addressId);
+            if (existingUa == null)
             {
-                AddressId = addressId,
-                UserId = userId
-            };
-            await this.data.UsersAddresses.AddAsync(ua);
+                UserAddress ua = new UserAddress()
+                {
+                    AddressId = addressId,
+                    UserId = userId
+                };
+                await this.data.UsersAddresses.AddAsync(ua);
+
+            }
 
             await this.data.SaveChangesAsync();
         }
